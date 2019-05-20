@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moon.sxcms.dao.WeaveConstructionMapper" >
+  <resultMap id="BaseResultMap" type="com.moon.sxcms.pojo.WeaveConstruction" >
+    <id column="w_id" property="wId" jdbcType="INTEGER" />
+    <result column="w_name" property="wName" jdbcType="VARCHAR" />
+    <result column="w_pid" property="wPid" jdbcType="INTEGER" />
+    <result column="w_path" property="wPath" jdbcType="VARCHAR" />
+    <result column="w_order" property="wOrder" jdbcType="INTEGER" />
+    <result column="w_isshow" property="wIsshow" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    w_id, w_name, w_pid, w_path, w_order, w_isshow
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.sxcms.pojo.WeaveConstructionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from weave_construction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from weave_construction
+    where w_id = #{wId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from weave_construction
+    where w_id = #{wId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.moon.sxcms.pojo.WeaveConstructionExample" >
+    delete from weave_construction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.moon.sxcms.pojo.WeaveConstruction" >
+    insert into weave_construction (w_id, w_name, w_pid, 
+      w_path, w_order, w_isshow
+      )
+    values (#{wId,jdbcType=INTEGER}, #{wName,jdbcType=VARCHAR}, #{wPid,jdbcType=INTEGER}, 
+      #{wPath,jdbcType=VARCHAR}, #{wOrder,jdbcType=INTEGER}, #{wIsshow,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.moon.sxcms.pojo.WeaveConstruction" >
+    insert into weave_construction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wId != null" >
+        w_id,
+      </if>
+      <if test="wName != null" >
+        w_name,
+      </if>
+      <if test="wPid != null" >
+        w_pid,
+      </if>
+      <if test="wPath != null" >
+        w_path,
+      </if>
+      <if test="wOrder != null" >
+        w_order,
+      </if>
+      <if test="wIsshow != null" >
+        w_isshow,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wId != null" >
+        #{wId,jdbcType=INTEGER},
+      </if>
+      <if test="wName != null" >
+        #{wName,jdbcType=VARCHAR},
+      </if>
+      <if test="wPid != null" >
+        #{wPid,jdbcType=INTEGER},
+      </if>
+      <if test="wPath != null" >
+        #{wPath,jdbcType=VARCHAR},
+      </if>
+      <if test="wOrder != null" >
+        #{wOrder,jdbcType=INTEGER},
+      </if>
+      <if test="wIsshow != null" >
+        #{wIsshow,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.moon.sxcms.pojo.WeaveConstructionExample" resultType="java.lang.Integer" >
+    select count(*) from weave_construction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update weave_construction
+    <set >
+      <if test="record.wId != null" >
+        w_id = #{record.wId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wName != null" >
+        w_name = #{record.wName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wPid != null" >
+        w_pid = #{record.wPid,jdbcType=INTEGER},
+      </if>
+      <if test="record.wPath != null" >
+        w_path = #{record.wPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wOrder != null" >
+        w_order = #{record.wOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.wIsshow != null" >
+        w_isshow = #{record.wIsshow,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update weave_construction
+    set w_id = #{record.wId,jdbcType=INTEGER},
+      w_name = #{record.wName,jdbcType=VARCHAR},
+      w_pid = #{record.wPid,jdbcType=INTEGER},
+      w_path = #{record.wPath,jdbcType=VARCHAR},
+      w_order = #{record.wOrder,jdbcType=INTEGER},
+      w_isshow = #{record.wIsshow,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moon.sxcms.pojo.WeaveConstruction" >
+    update weave_construction
+    <set >
+      <if test="wName != null" >
+        w_name = #{wName,jdbcType=VARCHAR},
+      </if>
+      <if test="wPid != null" >
+        w_pid = #{wPid,jdbcType=INTEGER},
+      </if>
+      <if test="wPath != null" >
+        w_path = #{wPath,jdbcType=VARCHAR},
+      </if>
+      <if test="wOrder != null" >
+        w_order = #{wOrder,jdbcType=INTEGER},
+      </if>
+      <if test="wIsshow != null" >
+        w_isshow = #{wIsshow,jdbcType=INTEGER},
+      </if>
+    </set>
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moon.sxcms.pojo.WeaveConstruction" >
+    update weave_construction
+    set w_name = #{wName,jdbcType=VARCHAR},
+      w_pid = #{wPid,jdbcType=INTEGER},
+      w_path = #{wPath,jdbcType=VARCHAR},
+      w_order = #{wOrder,jdbcType=INTEGER},
+      w_isshow = #{wIsshow,jdbcType=INTEGER}
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+</mapper>
