@@ -1,4 +1,4 @@
-package com.moon.sxcms.service;
+package com.moon.service;
 
 public interface ILoginUserService {
 }

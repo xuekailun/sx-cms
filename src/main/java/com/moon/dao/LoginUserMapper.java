@@ -1,11 +1,14 @@
-package com.moon.sxcms.dao;
+package com.moon.dao;
 
-import com.moon.sxcms.pojo.LoginUser;
-import com.moon.sxcms.pojo.LoginUserExample;
+
+import com.moon.pojo.LoginUser;
+import com.moon.pojo.LoginUserExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface LoginUserMapper {
     int countByExample(LoginUserExample example);
 

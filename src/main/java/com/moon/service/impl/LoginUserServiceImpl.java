@@ -1,7 +1,7 @@
-package com.moon.sxcms.service.impl;
+package com.moon.service.impl;
 
-import com.moon.sxcms.dao.LoginUserMapper;
-import com.moon.sxcms.service.ILoginUserService;
+import com.moon.dao.LoginUserMapper;
+import com.moon.service.ILoginUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

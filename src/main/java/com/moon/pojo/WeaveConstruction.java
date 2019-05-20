@@ -1,4 +1,4 @@
-package com.moon.sxcms.pojo;
+package com.moon.pojo;
 
 public class WeaveConstruction {
     private Integer wId;

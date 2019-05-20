@@ -1,12 +1,14 @@
-package com.moon.sxcms.dao;
+package com.moon.dao;
 
 
-import com.moon.sxcms.pojo.WeaveConstruction;
-import com.moon.sxcms.pojo.WeaveConstructionExample;
+import com.moon.pojo.WeaveConstruction;
+import com.moon.pojo.WeaveConstructionExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface WeaveConstructionMapper {
     int countByExample(WeaveConstructionExample example);
 
@@ -21,6 +23,8 @@ public interface WeaveConstructionMapper {
     List<WeaveConstruction> selectByExample(WeaveConstructionExample example);
 
     WeaveConstruction selectByPrimaryKey(Integer wId);
+
+    List<WeaveConstruction> selectByPid(Integer pId);
 
     int updateByExampleSelective(@Param("record") WeaveConstruction record, @Param("example") WeaveConstructionExample example);
 

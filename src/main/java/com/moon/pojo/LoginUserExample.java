@@ -1,4 +1,4 @@
-package com.moon.sxcms.pojo;
+package com.moon.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
