@@ -3,9 +3,12 @@ package com.moon.controller.cms;
 import com.moon.pojo.WeaveConstruction;
 import com.moon.service.IWeaveConstructionService;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +16,9 @@ import java.util.List;
 /***
  * 组织架构
  */
-@RestController
+@Controller
+@RequestMapping("column/")
+@Slf4j
 public class WeaveConstructionController {
 
     @Autowired
@@ -30,7 +35,7 @@ public class WeaveConstructionController {
      * @return
      */
     @GetMapping("/list")
-    public List list() {
+    public String list(Model model) {
         //获取跟目录
         List<WeaveConstruction> constructions = iWeaveConstructionService.selectByPid(0);
 
@@ -63,14 +68,18 @@ public class WeaveConstructionController {
                     column.setId(gid);
                     column.setPid(gpid);
                     column.setName(gname);
-                    allList.add(column);
+//                    allList.add(column);
+                    list.add(column);
                 }
 
-                list.add(allList);
+//                list.add(allList);
             }
         }
+        log.info("columnList :{}",list);
 
-        return list;
+        model.addAttribute("columnList",list);
+
+        return "cms/column/mailbox";
     }
 
 }
