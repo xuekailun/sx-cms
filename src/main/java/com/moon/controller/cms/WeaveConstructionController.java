@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * 组织架构
+ */
 @RestController
 public class WeaveConstructionController {
 
@@ -22,6 +25,10 @@ public class WeaveConstructionController {
     }
 
 
+    /**
+     * 查询出所有的部门架构
+     * @return
+     */
     @GetMapping("/list")
     public List list() {
         //获取跟目录
