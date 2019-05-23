@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface IWeaveConstructionService {
 
-    List<WeaveConstruction> selectByPid(Integer pId);
+    /**
+     * 获取树
+     * @param pid
+     * @return
+     */
+    List getColumns();
 }

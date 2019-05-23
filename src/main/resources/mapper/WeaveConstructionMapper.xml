@@ -98,6 +98,13 @@
     where w_pid = #{pId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from weave_construction
+    where w_id != 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from weave_construction
     where w_id = #{wId,jdbcType=INTEGER}
