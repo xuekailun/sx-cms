@@ -8,6 +8,9 @@
     <result column="w_path" property="wPath" jdbcType="VARCHAR" />
     <result column="w_order" property="wOrder" jdbcType="INTEGER" />
     <result column="w_isshow" property="wIsshow" jdbcType="INTEGER" />
+    <result column="w_type" property="wType" jdbcType="INTEGER" />
+    <result column="w_template" property="wTemplate" jdbcType="VARCHAR" />
+    <result column="w_islist" property="wIslist" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    w_id, w_name, w_pid, w_path, w_order, w_isshow
+    w_id, w_name, w_pid, w_path, w_order, w_isshow, w_type, w_template, w_islist
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.pojo.WeaveConstructionExample" >
     select

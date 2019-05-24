@@ -60,7 +60,7 @@
             是否生成 example类 -->
 
         <table schema="sx_cms" tableName="contents"
-               domainObjectName="LoginUser" enableCountByExample="true"
+               domainObjectName="Contents" enableCountByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true">
         </table>

@@ -13,6 +13,12 @@ public class WeaveConstruction {
 
     private Integer wIsshow;
 
+    private Integer wType;
+
+    private String wTemplate;
+
+    private Integer wIslist;
+
     public Integer getwId() {
         return wId;
     }
@@ -59,5 +65,29 @@ public class WeaveConstruction {
 
     public void setwIsshow(Integer wIsshow) {
         this.wIsshow = wIsshow;
+    }
+
+    public Integer getwType() {
+        return wType;
+    }
+
+    public void setwType(Integer wType) {
+        this.wType = wType;
+    }
+
+    public String getwTemplate() {
+        return wTemplate;
+    }
+
+    public void setwTemplate(String wTemplate) {
+        this.wTemplate = wTemplate == null ? null : wTemplate.trim();
+    }
+
+    public Integer getwIslist() {
+        return wIslist;
+    }
+
+    public void setwIslist(Integer wIslist) {
+        this.wIslist = wIslist;
     }
 }
