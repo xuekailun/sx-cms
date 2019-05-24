@@ -20,10 +20,31 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
         this.weaveConstructionMapper = weaveConstructionMapper;
     }
 
+    public int insertSelective(WeaveConstruction record){
+        return weaveConstructionMapper.insertSelective(record);
+    }
+
 
     /* 查询栏目除跟目录 */
     public List<WeaveConstruction> selectAll(){
         return weaveConstructionMapper.selectAll();
+    }
+
+    public List<WeaveConstruction> selectByPid(Integer pid){
+        return weaveConstructionMapper.selectByPid(pid);
+    }
+
+    /***
+     * 通过id 去查询栏目名称
+     * @param Id
+     * @return
+     */
+    public WeaveConstruction selectById(Integer Id){
+        List<WeaveConstruction> constructions =  weaveConstructionMapper.selectById(Id);
+        if(constructions.size() > 0 ) {
+            return constructions.get(0);
+        }
+        return new WeaveConstruction();
     }
 
     /**

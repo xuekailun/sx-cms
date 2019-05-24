@@ -1,9 +1,16 @@
 package com.moon.controller.api;
 
+import com.moon.commons.ServerResponse;
+import com.moon.pojo.Contents;
+import com.moon.pojo.WeaveConstruction;
 import com.moon.service.IContentsService;
+import com.moon.service.IWeaveConstructionService;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -12,13 +19,17 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Slf4j
 public class ContentsApi {
 
     private final IContentsService iContentsService;
 
+    private final IWeaveConstructionService iWeaveConstructionService;
+
     @Autowired
-    public ContentsApi(IContentsService iContentsService) {
+    public ContentsApi(IContentsService iContentsService, IWeaveConstructionService iWeaveConstructionService) {
         this.iContentsService = iContentsService;
+        this.iWeaveConstructionService = iWeaveConstructionService;
     }
 
     @GetMapping("list")
@@ -42,9 +53,19 @@ public class ContentsApi {
         Map<String,Object> map = new HashMap<>();
         map.put("code","0");
         map.put("msg","操作成功");
-        map.put("data", demos);
-        map.put("count", "3");
+        map.put("data", iContentsService.selectContentBy());
+//        map.put("count", "3");
         return map;
+    }
+
+    @PostMapping("column/increases")
+    public ServerResponse insert(@RequestBody WeaveConstruction reqBody){
+        log.info("reqBody {}",reqBody);
+        int inserCount = iWeaveConstructionService.insertSelective(reqBody);
+        if(inserCount > 0){
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
     }
 }
 

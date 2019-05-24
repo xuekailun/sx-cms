@@ -101,6 +101,13 @@
     where w_pid = #{pId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from weave_construction
+    where w_id = #{Id,jdbcType=INTEGER}
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

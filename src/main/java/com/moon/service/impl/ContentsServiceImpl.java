@@ -21,4 +21,8 @@ public class ContentsServiceImpl implements IContentsService {
     public List<Contents> selectContentBy(){
         return contentsMapper.selectContentBy();
     }
+
+    public int insertSelective(Contents record){
+        return contentsMapper.insertSelective(record);
+    }
 }

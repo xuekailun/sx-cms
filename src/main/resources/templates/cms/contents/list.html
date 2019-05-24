@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<table id="demo" lay-filter="test"></table>
+<table id="demo" lay-filter="test" lay-data="{skin:'nob', even:true}" class="layui-table" ></table>
 
 <script src="/cms/layui/js/layui.js"></script>
 <script th:inline="javascript">
@@ -24,6 +24,7 @@
             ,url: '/list' //数据接口
             ,page: true //开启分页
             ,limit: 1
+            ,skin: 'nob'
             ,cols: [[ //表头
                 {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
                 ,{field: 'name', title: '用户名', width:80}

@@ -26,6 +26,8 @@ public interface WeaveConstructionMapper {
 
     List<WeaveConstruction> selectByPid(Integer pId);
 
+    List<WeaveConstruction> selectById(Integer Id);
+
     int updateByExampleSelective(@Param("record") WeaveConstruction record, @Param("example") WeaveConstructionExample example);
 
     int updateByExample(@Param("record") WeaveConstruction record, @Param("example") WeaveConstructionExample example);
