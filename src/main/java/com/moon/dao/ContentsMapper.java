@@ -1,11 +1,13 @@
 package com.moon.dao;
 
-import com.test.example.pojo.Contents;
-import com.test.example.pojo.ContentsExample;
+import com.moon.pojo.Contents;
+import com.moon.pojo.ContentsExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface ContentsMapper {
     int countByExample(ContentsExample example);
 
@@ -34,4 +36,6 @@ public interface ContentsMapper {
     int updateByPrimaryKeyWithBLOBs(Contents record);
 
     int updateByPrimaryKey(Contents record);
+
+    List<Contents> selectContentBy();
 }

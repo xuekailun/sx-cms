@@ -122,6 +122,10 @@
     from contents
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectContentBy" resultType="com.moon.pojo.Contents" >
+    select id,title,insertdate from contents
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from contents
     where id = #{id,jdbcType=INTEGER}
