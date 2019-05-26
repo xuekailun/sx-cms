@@ -37,4 +37,6 @@ public class Contents {
     private String author;
 
     private Integer type; // 发布类型
+
+    private String wname;
 }

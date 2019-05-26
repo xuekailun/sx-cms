@@ -43,7 +43,7 @@
                             <label class="col-sm-2 control-label">选择栏目：</label>
 
                             <div class="col-sm-10">
-                                <input type="hidden" th:value="${wId}" id="wId"/>
+                                <input type="hidden" th:value="${contents.wcid}" id="wId"/>
                                 <input type="text" th:value="${wName}" class="form-control" value="">
                             </div>
                         </div>
@@ -51,28 +51,32 @@
                             <label class="col-sm-2 control-label">标题：</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="title" value="">
+                                <input type="text" th:value="${contents.title}" class="form-control" id="title" value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">发布者：</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="author" value="">
+                                <input type="text"  th:value="${contents.author}" class="form-control" id="author" value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">关键词：</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="gjc" value="">
+                                <input type="text"  th:value="${contents.keyword}" class="form-control" id="gjc" value="">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="ibox-content no-padding">
-                    <div class="summernote"></div>
+                    <div class="summernote" th:utext="${contents.content}">
+
+
+                    </div>
                 </div>
+
                 <div class="mail-body text-right tooltip-demo">
                     <a href="javascript:;" onclick="toSub()" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> 发送</a>
                     <a href="javascript:;" onclick="cancel()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> 放弃</a>
@@ -122,7 +126,6 @@
     var zNodes = dataList;
 
     $(document).ready(function () {
-
         $('.summernote').summernote({
             lang: 'zh-CN'
         });

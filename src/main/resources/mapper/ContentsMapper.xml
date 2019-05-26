@@ -80,7 +80,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, title, keyword, summary, style, thumbnail, insertdate, updatedate, stick, stickdate, 
-    wcid, ishref, hrefs
+    wcid, ishref, hrefs,author,content
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -118,14 +118,24 @@
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from contents
     where id = #{id,jdbcType=INTEGER}
   </select>
 
   <select id="selectContentBy" resultType="com.moon.pojo.Contents" >
-     select c.id,c.title,c.author,c.insertdate,w.w_type as type from contents c ,weave_construction w where w.w_id = c.wcid
+    SELECT
+	c.id,
+	c.title,
+	c.author,
+	c.insertdate,
+	c.wcid,
+	w.w_name as wname,
+	w.w_type AS type
+    FROM
+	contents c,
+	weave_construction w
+    WHERE
+	w.w_id = c.wcid
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from contents
@@ -194,6 +204,9 @@
       <if test="content != null" >
         content,
       </if>
+      <if test="author != null" >
+        author,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -237,6 +250,9 @@
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

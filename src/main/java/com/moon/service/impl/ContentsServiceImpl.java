@@ -28,6 +28,14 @@ public class ContentsServiceImpl implements IContentsService {
         return contentsMapper.selectContentBy();
     }
 
+    public Integer deleteByPrimaryKey(Integer id){
+        return contentsMapper.deleteByPrimaryKey(id);
+    }
+
+    public Contents selectByPrimaryKey(Integer id){
+        return contentsMapper.selectByPrimaryKey(id);
+    }
+
     public List getColumns(){
         List<WeaveConstruction> constructions = weaveConstructionMapper.selectByPid(0);
         Integer id = null;

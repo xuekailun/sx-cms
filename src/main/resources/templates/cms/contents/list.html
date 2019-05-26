@@ -37,7 +37,7 @@
                     栏目数 (<span th:text="${listSize}">正在查询</span>)
                 </h2>
                 <div class="mail-tools tooltip-demo m-t-md">
-                    <blockquote class="text-warning" style="font-size:14px"> &nbsp;点击左边的树即可进行添加栏目
+                    <blockquote class="text-warning" style="font-size:14px"> &nbsp;点击左边的树即可进行添加文章
                 </div>
             </div>
             <div class="mail-box">
@@ -60,7 +60,7 @@
 <script src="/cms/js/content.js?v=1.0.0"></script>
 
 <script type="text/javascript" src="/cms/ztree/js/jquery.ztree.core.js"></script>
-<script type="text/javascript" src="/module/contents/insert.js"></script>
+<script type="text/javascript" src="/module/contents/content.js"></script>
 <!-- iCheck -->
 <script src="/cms/js/plugins/iCheck/icheck.min.js"></script>
 <script src="/layui/layui.js"></script>
@@ -78,9 +78,13 @@
             ,skin: 'nob'
             ,cols: [[ //表头
                 {field: 'id', title: 'id',  fixed: 'left'}
-                ,{field: 'title',title: '标题'}
+                ,{field: 'title',title: '标题',
+                    templet:function (d) {
+                        return '<a href="/cms/contents/article?id='+d.id+'">'+d.title+'</a>';
+                    }
+                }
                 ,{field: 'author',title: '发布者'}
-                ,{field: 'type',title: '类型'}
+                ,{field: 'wname',title: '栏目'}
                 ,{field: 'insertdate',title: '发布时间'}
                 ,{fixed: 'right', title:'操作', toolbar: '#cbarDemo'}
             ]]
@@ -93,10 +97,10 @@
             if(obj.event === 'del'){
                 debugger
                 layer.confirm('真的删除行么', function(index){
-                    toDelete(data.wId,index);
+                    toDelete(data.id,index);
                 });
             } else if(obj.event === 'edit'){
-                window.location.href = "update?id="+data.wId;
+                window.location.href = "update?id="+data.id;
             }
         });
 

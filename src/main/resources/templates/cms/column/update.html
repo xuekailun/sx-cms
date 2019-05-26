@@ -130,6 +130,7 @@
 <script src="/cms/js/plugins/iCheck/icheck.min.js"></script>
 <script  th:inline="javascript">
     var dataList = [[${columnList}]];
+
     var setting = {
         data: {
             simpleData: {
@@ -143,6 +144,9 @@
 
 
     $(document).ready(function () {
+
+
+
         $('.i-checks').iCheck({
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
