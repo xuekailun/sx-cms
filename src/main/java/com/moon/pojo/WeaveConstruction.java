@@ -1,5 +1,7 @@
 package com.moon.pojo;
 
+import lombok.Data;
+
 public class WeaveConstruction {
     private Integer wId;
 
@@ -19,6 +21,40 @@ public class WeaveConstruction {
 
     private Integer wIslist;
 
+    private String tname;
+    private String sname;
+
+    public String getTname() {
+        return tname;
+    }
+
+    public void setTname(String tname) {
+        this.tname = tname;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    @Override
+    public String toString() {
+        return "WeaveConstruction{" +
+                "wId=" + wId +
+                ", wName='" + wName + '\'' +
+                ", wPid=" + wPid +
+                ", wPath='" + wPath + '\'' +
+                ", wOrder=" + wOrder +
+                ", wIsshow=" + wIsshow +
+                ", wType=" + wType +
+                ", wTemplate='" + wTemplate + '\'' +
+                ", wIslist=" + wIslist +
+                '}';
+    }
+
     public Integer getwId() {
         return wId;
     }
@@ -32,7 +68,7 @@ public class WeaveConstruction {
     }
 
     public void setwName(String wName) {
-        this.wName = wName == null ? null : wName.trim();
+        this.wName = wName;
     }
 
     public Integer getwPid() {
@@ -48,7 +84,7 @@ public class WeaveConstruction {
     }
 
     public void setwPath(String wPath) {
-        this.wPath = wPath == null ? null : wPath.trim();
+        this.wPath = wPath;
     }
 
     public Integer getwOrder() {
@@ -80,7 +116,7 @@ public class WeaveConstruction {
     }
 
     public void setwTemplate(String wTemplate) {
-        this.wTemplate = wTemplate == null ? null : wTemplate.trim();
+        this.wTemplate = wTemplate;
     }
 
     public Integer getwIslist() {

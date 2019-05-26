@@ -1,38 +1,136 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
+
     <meta charset="utf-8">
-    <title>table模块快速使用</title>
-    <link rel="stylesheet" href="/cms/layui/css/layui.css" media="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 收件箱</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/cms/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/cms/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/cms/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/cms/css/animate.css" rel="stylesheet">
+    <link href="/cms/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/cms/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+
 </head>
-<body>
 
-<table id="demo" lay-filter="test" lay-data="{skin:'nob', even:true}" class="layui-table" ></table>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="ibox-content">
+                <div class="zTreeDemoBackground left">
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <h2 >
+                    栏目数 (<span th:text="${listSize}">正在查询</span>)
+                </h2>
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <blockquote class="text-warning" style="font-size:14px"> &nbsp;点击左边的树即可进行添加栏目
+                </div>
+            </div>
+            <div class="mail-box">
+                <table id="condemo" lay-filter="test"  class="table table-hover table-mail"></table>
+                <script type="text/html" id="cbarDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
 
-<script src="/cms/layui/js/layui.js"></script>
-<script th:inline="javascript">
 
-    var dataList = [[${contents}]];
+<!-- 全局js -->
+<script src="/cms/js/jquery.min.js?v=2.1.4"></script>
+<script src="/cms/js/bootstrap.min.js?v=3.3.6"></script>
 
+<!-- 自定义js -->
+<script src="/cms/js/content.js?v=1.0.0"></script>
+
+<script type="text/javascript" src="/cms/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/module/contents/insert.js"></script>
+<!-- iCheck -->
+<script src="/cms/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/layui/layui.js"></script>
+
+<script  th:inline="javascript">
     layui.use('table', function(){
         var table = layui.table;
 
         //第一个实例
         table.render({
-            elem: '#demo'
-            ,height: 312
-            ,url: '/list' //数据接口
+            elem: '#condemo'
+            ,id: 'wId'
+            ,url: '/contents/list' //数据接口
             ,page: true //开启分页
-            ,limit: 1
             ,skin: 'nob'
             ,cols: [[ //表头
-                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-                ,{field: 'name', title: '用户名', width:80}
-                ,{field: 'sex', title: '性别', width:80, sort: true}
+                {field: 'id', title: 'id',  fixed: 'left'}
+                ,{field: 'title',title: '标题'}
+                ,{field: 'author',title: '发布者'}
+                ,{field: 'type',title: '类型'}
+                ,{field: 'insertdate',title: '发布时间'}
+                ,{fixed: 'right', title:'操作', toolbar: '#cbarDemo'}
             ]]
         });
 
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                debugger
+                layer.confirm('真的删除行么', function(index){
+                    toDelete(data.wId,index);
+                });
+            } else if(obj.event === 'edit'){
+                window.location.href = "update?id="+data.wId;
+            }
+        });
+
+    });
+
+
+    var dataList = [[${columnList}]];
+    var data = [
+        {id:1, pId:0, name: "父节点1",url:"/column/list",target:"_self"},
+        {id:11, pId:1, name: "子节点1",url:"http://www.treejs.cn/",target:"_self"},
+        {id:12, pId:1, name: "子节点2",url:"http://www.treejs.cn/",target:"_self"}
+    ];
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true,
+
+            }
+        }
+    };
+
+    var zNodes = dataList;
+
+
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
     });
 </script>
+
+
 </body>
+
 </html>

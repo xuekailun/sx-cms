@@ -6,3 +6,6 @@
 
 ## jsZtree 
 > https://www.cnblogs.com/telwanggs/p/7447915.html
+
+## 富文本编辑
+> http://kindeditor.net/doc.php

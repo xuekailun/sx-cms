@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 后台登陆的主页
  */
 @Controller
+@RequestMapping("cms/")
 public class HomeController {
 
     /***

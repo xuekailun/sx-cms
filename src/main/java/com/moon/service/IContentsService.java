@@ -8,5 +8,7 @@ public interface IContentsService {
 
     List<Contents> selectContentBy();
 
+    List getColumns();
+
     int insertSelective(Contents record);
 }

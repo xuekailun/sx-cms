@@ -8,6 +8,10 @@ public interface IWeaveConstructionService {
 
     int insertSelective(WeaveConstruction record);
 
+    int updateByPrimaryKeySelective(WeaveConstruction record);
+
+    int insertWeaveConstruction(WeaveConstruction record);
+
     /**
      * 获取树
      * @param
@@ -26,4 +30,14 @@ public interface IWeaveConstructionService {
      * @return
      */
     WeaveConstruction selectById(Integer Id);
+
+    Integer deleteByPrimaryKey(Integer wId);
+
+    /***
+     * 判断是否在导航栏上显示
+     * @param isShow
+     * @param isList
+     * @return
+     */
+    List<WeaveConstruction> selectByIsShow(String isShow,String isList);
 }

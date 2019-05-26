@@ -18,6 +18,9 @@ public interface WeaveConstructionMapper {
 
     int insert(WeaveConstruction record);
 
+    int insertWeaveConstruction(WeaveConstruction record);
+
+
     int insertSelective(WeaveConstruction record);
 
     List<WeaveConstruction> selectByExample(WeaveConstructionExample example);
@@ -38,4 +41,9 @@ public interface WeaveConstructionMapper {
 
     /* 查询栏目除跟目录 */
     List<WeaveConstruction> selectAll();
+
+    List<WeaveConstruction> selectAllByCaseWhen();
+
+    /* 查询栏目是否在导航栏显示，如果不在导航栏显示，是否主页显示*/
+    List<WeaveConstruction> selectByIsShow(@Param("isShow") String isShow,@Param("isList") String isList);
 }

@@ -33,4 +33,8 @@ public class Contents {
     private String hrefs;
 
     private String content;
+
+    private String author;
+
+    private Integer type; // 发布类型
 }

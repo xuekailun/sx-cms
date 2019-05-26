@@ -17,7 +17,7 @@
     <link href="/cms/css/animate.css" rel="stylesheet">
     <link href="/cms/css/style.css?v=4.1.0" rel="stylesheet">
     <link rel="stylesheet" href="/cms/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 
 </head>
 
@@ -33,84 +33,19 @@
         </div>
         <div class="col-sm-9 animated fadeInRight">
             <div class="mail-box-header">
-
-                <form method="get" action="index.html" class="pull-right mail-search">
-
-                    <div class="input-group">
-
-                        <input type="text" class="form-control input-sm" name="search" placeholder="搜索标题">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                搜索
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <h2>
-                    文章数 (16)
-
+                <h2 >
+                    栏目数 (<span th:text="${listSize}">正在查询</span>)
                 </h2>
-
                 <div class="mail-tools tooltip-demo m-t-md">
-                    <div class="btn-group pull-right">
-                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i>
-                        </button>
-                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i>
-                        </button>
-
-                    </div>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="刷新邮件列表"><i class="fa fa-refresh"></i> 刷新</button>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="添加"><i class="glyphicon glyphicon-plus"></i>
-                    </button>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="修改"><i class="glyphicon glyphicon-pencil"></i>
-                    </button>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-trash-o"></i>
-                    </button>
-
+                    <blockquote class="text-warning" style="font-size:14px"> &nbsp;点击左边的树即可进行添加栏目
                 </div>
             </div>
             <div class="mail-box">
-
-                <table class="table table-hover table-mail">
-                    <tbody>
-                    <tr class="unread">
-                        <td class="check-mail">
-                            <input type="checkbox" class="i-checks">
-                        </td>
-                        <td class="mail-ontact"><a href="mail_detail.html">支付宝</a><span class="label label-danger pull-right">置顶</span>
-                        </td>
-                        <td class="mail-subject"><a href="mail_detail.html">支付宝提醒</a>
-                        </td>
-                        <td class=""><i class="fa fa-paperclip"></i>
-                        </td>
-                        <td class="text-right mail-date">昨天 10:20</td>
-                    </tr>
-                    <tr class="unread">
-                        <td class="check-mail">
-                            <input type="checkbox" class="i-checks" checked>
-                        </td>
-                        <td class="mail-ontact"><a href="mail_detail.html">Amaze UI</a>
-                        </td>
-                        <td class="mail-subject"><a href="mail_detail.html">Amaze UI Beta2 发布</a>
-                        </td>
-                        <td class=""></td>
-                        <td class="text-right mail-date">上午10:57</td>
-                    </tr>
-                    <tr class="read">
-                        <td class="check-mail">
-                            <input type="checkbox" class="i-checks">
-                        </td>
-                        <td class="mail-ontact"><a href="mail_detail.html">WordPress</a>
-                        </td>
-                        <td class="mail-subject"><a href="mail_detail.html">wp-user-frontend-pro v2.1.9</a>
-                        </td>
-                        <td class=""></td>
-                        <td class="text-right mail-date">上午9:21</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-
+                <table id="demo" lay-filter="test"  class="table table-hover table-mail"></table>
+                <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
             </div>
         </div>
     </div>
@@ -125,9 +60,49 @@
 <script src="/cms/js/content.js?v=1.0.0"></script>
 
 <script type="text/javascript" src="/cms/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/module/contents/insert.js"></script>
 <!-- iCheck -->
 <script src="/cms/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/layui/layui.js"></script>
+
 <script  th:inline="javascript">
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,id: 'wId'
+            ,url: '/column/list/v1' //数据接口
+            ,page: true //开启分页
+            ,skin: 'nob'
+            ,cols: [[ //表头
+                {field: 'wId', title: 'id',  fixed: 'left'}
+                ,{field: 'wName',title: '栏目名称'}
+                ,{field: 'wPath',title: '栏目路径'}
+                ,{field: 'tname',title: '类型'}
+                ,{field: 'sname',title: '导航展示'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
+            ]]
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                debugger
+                layer.confirm('真的删除行么', function(index){
+                    toDelete(data.wId,index);
+                });
+            } else if(obj.event === 'edit'){
+                window.location.href = "update?id="+data.wId;
+            }
+        });
+
+    });
+
+
     var dataList = [[${columnList}]];
     var data = [
         {id:1, pId:0, name: "父节点1",url:"/column/list",target:"_self"},

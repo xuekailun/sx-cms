@@ -20,15 +20,25 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
         this.weaveConstructionMapper = weaveConstructionMapper;
     }
 
+    public int updateByPrimaryKeySelective(WeaveConstruction record){
+        return weaveConstructionMapper.updateByPrimaryKeySelective(record);
+    }
+
     public int insertSelective(WeaveConstruction record){
         return weaveConstructionMapper.insertSelective(record);
+    }
+
+    public int insertWeaveConstruction(WeaveConstruction record){
+        return weaveConstructionMapper.insertWeaveConstruction(record);
     }
 
 
     /* 查询栏目除跟目录 */
     public List<WeaveConstruction> selectAll(){
-        return weaveConstructionMapper.selectAll();
+        return weaveConstructionMapper.selectAllByCaseWhen();
     }
+
+
 
     public List<WeaveConstruction> selectByPid(Integer pid){
         return weaveConstructionMapper.selectByPid(pid);
@@ -72,28 +82,36 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
             column.setName(name);
 
             //显示添加的页面
-            column.setUrl("/column/add?id="+id);
+            column.setUrl("/cms/column/add?id="+id);
             list.add(column);
-            List<WeaveConstruction> weaveConstructionList = weaveConstructionMapper.selectByPid(id);
+            List<WeaveConstruction> weaveConstructionList = weaveConstructionMapper.selectAll();
             for(WeaveConstruction ction : weaveConstructionList){
                 allList = new ArrayList<>();
                 gid = ction.getwId();
                 gname = ction.getwName();
                 gpid = ction.getwPid();
-                if(id == gpid){
+           //     if(id == gpid){
                     column = new Column();
                     column.setId(gid);
                     column.setPId(gpid);
                     column.setName(gname);
                     //显示添加的页面
-                    column.setUrl("/column/add?id="+id);
+                    column.setUrl("/cms/column/add?id="+gid);
                     list.add(column);
-                }
+           //     }
 
             }
         }
 
         return list;
+    }
+
+    public List<WeaveConstruction> selectByIsShow(String isShow,String isList){
+        return weaveConstructionMapper.selectByIsShow(isShow, isList);
+    }
+
+    public Integer deleteByPrimaryKey(Integer wId){
+        return weaveConstructionMapper.deleteByPrimaryKey(wId);
     }
 }
 
@@ -105,6 +123,7 @@ class Column{
     private String name;
     private String url;
     private String target = "_self";
+    private String open = "true";
 
     public Integer getpId() {
         return pId;

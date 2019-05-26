@@ -1,0 +1,387 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>乐才</title>
+<link type="text/css" rel="stylesheet" href="/css/css.css">
+</head>
+
+<body>
+<div class="header">
+	<div class="nav">
+		<img class="logo" src="/images/logo.png">
+		<ul th:each="nav:${nav}">
+			<li><a th:href="${nav.wPath}" href="#" th:text="${nav.wName}">首页</a></li>
+
+		</ul>
+		<div class="free">
+			<a href="#">免费预约演示</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="banner">
+		<img src="/images/banner.jpg">
+	</div>
+</div>
+<div class="body">
+	<div class="goods">
+		<h1>产品</h1>
+		<h3>用技术释放服务业劳动力潜力!</h3><span class="more1"><a href="#">更多 > </a></span>
+		<div class="clear"></div>
+		<div class="goods-row1">
+			<div class="goods-row1-one">
+				<h2>组织人事云</h2>
+				<p>
+					组织职位管理<br />
+					人力资源管理<br />
+					权限授权管理<br />
+				</p>
+				<span class="goods-more"><a href="#">更多 > </a></span>
+			</div>
+			<div class="goods-row1-two">
+				<h2>行政后勤云</h2>
+				<p>
+					宿舍后勤管理<br />
+					物品领用管理<br />
+					通知公告管理<br />
+				</p>
+				<span class="goods-more"><a href="#">更多 > </a></span>
+			</div>
+			<div class="goods-row1-three">
+				<h2>排班考勤云</h2>
+				<p>
+					智能排班调度<br />
+					自动考勤管理<br />
+					出勤合理管控<br />
+				</p>
+				<span class="goods-more"><a href="#">更多 > </a></span>
+			</div>
+			<div class="goods-row1-four">
+				<h2>培训学习云</h2>
+				<p>
+					学习中心<br />
+					考试中心<br />
+					认证中心<br />
+				</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="goods-row2">
+			<div class="goods-row2-one">
+				<h2>薪酬保险云</h2>
+				<p>
+					薪酬福利管理<br />
+					社保商保管理<br />
+					计件工资系统<br />
+				</p>
+				<span class="goods-more"><a href="#">更多 > </a></span>
+			</div>
+			<div class="goods-row2-two">
+				<h2>智能分析云</h2>
+				<p>
+					BI报表中心<br />
+				</p>
+			</div>
+			<div class="goods-row2-three">
+				<h2>PaaS</h2>
+				<p>
+					PaaS平台<br />
+				</p>
+			</div>
+			<div class="goods-row2-four">
+				<h2>智能硬件</h2>
+				<p>
+					乐才云考勤机
+					考勤机程序<br />
+				</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="service">
+		<h1>服务</h1>
+		<h3>一体化服务平台，全面提升客户体验</h3><span class="more1"><a href="#">更多 > </a></span>
+		<div class="clear"></div>
+		<div class="service-main">
+			<div class="service-main-one">
+				<h2>技术支持</h2>
+				<p>
+					50人+实施团队<br />
+					15年e-HR经验<br />
+					300家客户实践<br />
+					500强技术架构<br />
+				</p>
+			</div>
+			<div class="service-main-two">
+				<h2>实施服务</h2>
+				<p>
+					项目规划<br />
+					需求调研<br />
+					系统配置<br />
+					更多  >		
+			</div>
+			<div class="service-main-three">
+				<h2>客户成功服务</h2>
+				<p>
+					售后支持<br />
+					在线协助<br />
+					客服电话<br />
+					更多  >		
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="anli">
+		<div class="anli-main">
+			<h1>案例</h1>
+			<span class="more1"><a href="#">更多 > </a></span>
+			<div class="clear"></div>
+			<div class="anli-data">
+				<div class="">
+					<h1>450+</h1>
+					<p>企业</p>
+				</div>
+				<div class="">
+					<h1>40000+</h1>
+					<p>门店</p>
+				</div>
+				<div class="">
+					<h1>450000+</h1>
+					<p>员工</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="anli-anli">
+				<div class="anli-first">
+					<img src="/images/f1.jpg">
+					<img src="/images/f2.jpg">
+					<img src="/images/f3.jpg">
+					<img src="/images/f4.jpg">
+					<hr>
+					<img src="/images/f5.jpg">
+					<img src="/images/f6.jpg">
+				</div>
+				<div class="anli-second">
+					<img src="/images/video.jpg">
+					<hr>
+					<img src="/images/f7.jpg" style="margin-right:26px;">
+					<img src="/images/f8.jpg">
+					<img src="/images/f9.jpg" style="margin-right:26px;">
+					<img src="/images/f10.jpg">
+				</div>
+				<div class="anli-third">
+					<img src="/images/f11.jpg">
+					<img src="/images/f12.jpg">
+					<img src="/images/f13.jpg">
+					<img src="/images/f14.jpg">
+					<hr>
+					<img src="/images/f15.jpg">
+					<img src="/images/f16.jpg">
+					
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="zixun">	
+		<h1>资讯</h1>
+		<span class="more1"><a href="#">更多 > </a></span>
+		<div class="clear"></div>
+		<div class="zixun-main">
+			<a class="zixun-banner" href="#"><img src="/images/zixun1.jpg"></a>
+			<div class="zixun-zixun">
+				<ul>
+					<li>
+						<a href="#"><img src="/images/zixun2.jpg"></a>
+						<div class="zixun-message">
+							<a class="zixun-more" href="#">
+								<img src="/images/zixunmore.png">
+							</a>
+							<h3><a href="#">星耀全场 | 乐才荣膺2019···</a></h3>
+							<p><a href="#">3月12日-14日，中国连锁经营协会主办的“新消费论坛···</a></p>
+						</div>
+					</li>
+					<li>
+						<a href="#"><img src="/images/zixun3.jpg"></a>
+						<div class="zixun-message">
+							<a class="zixun-more" href="#">
+								<img src="/images/zixunmore.png">
+							</a>
+							<h3><a href="#">精益求精 | I Joy U 沙龙···</a></h3>
+							<p><a href="#">4月28日，乐才携手可为人力、北大纵横联合举办了以“揭秘500强企业···</a></p>
+						</div>
+					</li>
+					<li>
+						<a href="#"><img src="/images/zixun4.jpg"></a>
+						<div class="zixun-message">
+							<a class="zixun-more" href="#">
+								<img src="/images/zixunmore.png">
+							</a>
+							<h3><a href="#">火力全开 | 乐才又双叒叕拿奖···</a></h3>
+							<p><a href="#">2019年4月12日，2018-2019中国酒店业金光奖颁奖典礼在···</a></p>
+						</div>
+					</li>
+					<div class="clear"></div>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="zhuanzhu">
+		<img src="/images/zhuanzhu.png" style="margin-top:29px;">
+		<div class="free">
+			<a href="#">免费预约演示</a>
+		</div>
+	</div>
+	<div class="yanjiuyuan">
+		<div class="yanjiuyuan-in">
+			<h1>研究院</h1>
+			<span class="more1"><a href="#">更多 > </a></span>
+			<div class="clear"></div>
+			<div class="yanjiuyuan-main">
+				<ul>
+					<li>
+						<img src="/images/y1.jpg">
+						<div class="yjy-message">
+							<h2><a href="#">专访 | 有璟阁总经理陈锦屏：新港···</a></h2>
+							<img src="/images/cf.png" class="cf"><span><img src="/images/eye.png">&nbsp;5966</span>
+						</div>
+					</li>
+					<li>
+						<img src="/images/y2.jpg">
+						<div class="yjy-message">
+							<h2><a href="#">大咖说 | 西十二街牛排创始人解红雷···</a></h2>
+							<img src="/images/cf.png" class="cf"><span><img src="/images/eye.png">&nbsp;5966</span>
+						</div>
+					</li>
+					<li>
+						<img src="images/y3.jpg">
+						<div class="yjy-message">
+							<h2><a href="#">大咖说 | 旺顺阁HRVP管永利···</a></h2>
+							<img src="/images/cf.png" class="cf"><span><img src="/images/eye.png">&nbsp;5966</span>
+						</div>
+					</li>			
+				</ul>
+				<div class="clear"></div>	
+			</div>
+		</div>
+	</div>
+	<div class="jianjie">
+		<h1>乐才简介</h1>
+		<p>乐才——专注服务业、不只是排班，是专业的服务业排班及劳动力管理平台。总部位于北京，在上海、广州、深圳设有分公司，同时在全国各地有近20余家渠道及合作伙伴，业务及服务覆盖近30多个重点城市。</p>
+		<a href="#"><img src="/images/bf.png"></a>
+	</div>
+	<div class="zhanlue">
+		<h1>战略合作伙伴</h1>
+		<h3>深度合作，携手共赢!</h3>
+		<div class="clear"></div>	
+		<div class="zhanlue-friendlink">
+			<img src="/images/l1.png"><img src="/images/l2.png"><img src="/images/l3.png"><img src="/images/l4.png"><img src="/images/l5.png">
+		</div>
+		<div class="clear"></div>	
+	</div>
+	<div class="tiyan">
+		<h1>开始体验我们的服务</h1>
+		<h4>现在开始尝试更简单高效的工作方式</h4>
+		<form>
+			<input type="text" class="phone-input" value="您的手机号">
+			<input type="button" class="phone-button" value="开始体验">
+		</form>
+	</div>
+</div>
+<div class="footer">
+	<div class="footer-top">
+		<div class="footer-top-left">
+			<div class="kefu">
+				<img src="/images/kefu.png">
+				<div class="content">
+					<span style="font-size:16px;color:#b1b1b1;">售前/后咨询热线</span><br />
+					<span style="font-size:18px;color:#ffffff;margin-top:-14px;">热线：4006-520-588</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="erweima">
+				<img src="/images/erweima.jpg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="/images/erweima.jpg"><br />
+				&nbsp;&nbsp;微信订阅号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;微信订阅号
+			</div>
+		</div>
+		<div class="footer-top-right">
+			<ul>
+				<h1>劳动力云</h1>
+				<li><a href="#">智能排班调度</a></li>
+				<li><a href="#">自动考勤管理</a></li>
+				<li><a href="#">出勤合理管控</a></li>
+				<li><a href="#">缺勤假期合规</a></li>
+				<li><a href="#">劳资风险管控</a></li>
+			</ul>
+			<ul>
+				<h1>人事云</h1>
+				<li><a href="#">人事行政管理</a></li>
+				<li><a href="#">计件工资系统</a></li>
+				<li><a href="#">合同管理</a></li>
+				<li><a href="#">黑名单里管理</a></li>
+				<li><a href="#">人才库</a></li>
+			</ul>
+			<ul>
+				<h1>后勤云</h1>
+				<li><a href="#">宿舍管理</a></li>
+				<li><a href="#">物品管理</a></li>
+				<li><a href="#">消息中心</a></li>
+				<li><a href="#">资料库</a></li>
+				<li><a href="#">员餐管理</a></li>
+				<li><a href="#">福利管理</a></li>
+			</ul>
+			<ul>
+				<h1>薪酬云</h1>
+				<li><a href="#">薪酬管理</a></li>
+				<li><a href="#">保险管理</a></li>
+			</ul>
+			<ul>
+				<h1>培训云</h1>
+				<li><a href="#">学习中心</a></li>
+				<li><a href="#">考试中心</a></li>
+				<li><a href="#">认证中心</a></li>
+				<li><a href="#">消息中心</a></li>
+				<li><a href="#">系统设置</a></li>
+				<li><a href="#">学习管理</a></li>
+				<li><a href="#">课程管理</a></li>
+				<li><a href="#">认证/晋升</a></li>
+			</ul>
+			<ul>
+				<h1>移动端</h1>
+				<li><a href="#">预警中心</a></li>
+				<li><a href="#">人事行政</a></li>
+				<li><a href="#">出勤打卡</a></li>
+				<li><a href="#">排班考勤</a></li>
+			</ul>
+			<ul>
+				<h1>硬件</h1>
+				<li><a href="#">考勤猫</a></li>
+				<li><a href="#">考勤机程序</a></li>
+			</ul>
+			<ul>
+				<h1>服务</h1>
+				<li><a href="#">案例</a></li>
+				<li><a href="#">研究院</a></li>
+				<li><a href="#">资讯</a></li>
+				<li><a href="#">走进乐才</a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	<div class="footer-bottom">
+		<div class="fb-nav">
+			<a href="#">关于我们</a><a href="#">站点地图</a><a href="#">法律声明及隐私权政策</a><a href="#">意见反馈</a><a href="#">联系我们</a>
+		</div>
+		<div class="clear"></div>
+		<div class="fb-copyright">
+			<span style="float:left;">京公网安备11010502037364号 ©2014-2018 乐才(北京)科技有限公司 ©版权所有</span><span style="float:right;">京ICP证01024956号</span>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+</body>
+</html>

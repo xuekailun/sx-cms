@@ -15,6 +15,7 @@
     <result column="wcid" property="wcid" jdbcType="INTEGER" />
     <result column="ishref" property="ishref" jdbcType="INTEGER" />
     <result column="hrefs" property="hrefs" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.moon.pojo.Contents" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -124,7 +125,7 @@
   </select>
 
   <select id="selectContentBy" resultType="com.moon.pojo.Contents" >
-    select id,title,insertdate from contents
+     select c.id,c.title,c.author,c.insertdate,w.w_type as type from contents c ,weave_construction w where w.w_id = c.wcid
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from contents

@@ -115,6 +115,40 @@
     where w_id != 1
   </select>
 
+  <select id="selectByIsShow" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from weave_construction
+    where w_isshow =#{isShow}
+    <if test="isList != null">
+      and w_islist = #{isList}
+    </if>
+  </select>
+
+  <select id="selectAllByCaseWhen"  resultType="com.moon.pojo.WeaveConstruction">
+    SELECT
+	w_id as wId,
+	w_name as wName,
+	w_pid as wPid,
+	w_path as wPath,
+    CASE w_isshow
+    WHEN '1' THEN
+        '是'
+    WHEN '0' THEN
+        '否'
+    END as sname,
+        CASE w_type
+    WHEN '1' THEN
+        '图文'
+    WHEN '2' THEN
+        '下载'
+    END as tname
+    FROM
+        weave_construction
+    WHERE
+	w_id != 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from weave_construction
     where w_id = #{wId,jdbcType=INTEGER}
@@ -133,6 +167,12 @@
       #{wPath,jdbcType=VARCHAR}, #{wOrder,jdbcType=INTEGER}, #{wIsshow,jdbcType=INTEGER}
       )
   </insert>
+
+  <insert id="insertWeaveConstruction" parameterType="com.moon.pojo.WeaveConstruction">
+    insert into weave_construction (w_name,w_pid,w_path,w_type,w_isshow)
+    values(#{wName},#{wPid},#{wPath},#{wType},#{wIsshow})
+  </insert>
+
   <insert id="insertSelective" parameterType="com.moon.pojo.WeaveConstruction" >
     insert into weave_construction
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -153,6 +193,15 @@
       </if>
       <if test="wIsshow != null" >
         w_isshow,
+      </if>
+      <if test="wType != null" >
+        w_type,
+      </if>
+      <if test="wTemplate != null" >
+        w_template,
+      </if>
+      <if test="wIslist != null" >
+        w_islist,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -237,6 +286,9 @@
       </if>
       <if test="wIsshow != null" >
         w_isshow = #{wIsshow,jdbcType=INTEGER},
+      </if>
+      <if test="wType != null" >
+        w_type = #{wType,jdbcType=INTEGER},
       </if>
     </set>
     where w_id = #{wId,jdbcType=INTEGER}
