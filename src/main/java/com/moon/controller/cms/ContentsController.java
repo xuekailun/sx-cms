@@ -31,10 +31,10 @@ public class ContentsController {
     @GetMapping("list")
     public String list(Model model, HttpSession session){
         List list =  iContentsService.getColumns();
-
+        List<Contents> contents = iContentsService.selectContentBy(null);
         model.addAttribute("columnList",list);
         session.setAttribute("columnList",list);
-        model.addAttribute("listSize",session.getAttribute("contentSize"));
+        model.addAttribute("listSize",contents.size());
         return "cms/contents/list";
     }
 
@@ -45,10 +45,19 @@ public class ContentsController {
             list = iContentsService.getColumns();
         }
         model.addAttribute("columnList",list);
+        // 查询文章表里面的wcid 字段是否有值 如果有值 则显示列表
         WeaveConstruction ction = iWeaveConstructionService.selectById(id);
-
         model.addAttribute("wName",ction.getwName());
-        model.addAttribute("wId",id);
+        model.addAttribute("contentId",id);
+
+        List<Contents> contents = iContentsService.selectContentBy(id == 1 ? null : id);
+        if(contents.size() > 0){
+            //显示列表页
+            model.addAttribute("listSize",contents.size());
+
+            return "cms/contents/list";
+        }
+
         return "cms/contents/insert";
     }
 

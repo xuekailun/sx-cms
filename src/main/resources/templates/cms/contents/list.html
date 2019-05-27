@@ -66,6 +66,8 @@
 <script src="/layui/layui.js"></script>
 
 <script  th:inline="javascript">
+    var contentId = [[${contentId}]];
+
     layui.use('table', function(){
         var table = layui.table;
 
@@ -73,7 +75,7 @@
         table.render({
             elem: '#condemo'
             ,id: 'wId'
-            ,url: '/contents/list' //数据接口
+            ,url: '/contents/list?id='+contentId //数据接口
             ,page: true //开启分页
             ,skin: 'nob'
             ,cols: [[ //表头

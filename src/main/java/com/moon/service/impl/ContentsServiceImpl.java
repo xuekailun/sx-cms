@@ -24,8 +24,8 @@ public class ContentsServiceImpl implements IContentsService {
         this.weaveConstructionMapper = weaveConstructionMapper;
     }
 
-    public List<Contents> selectContentBy(){
-        return contentsMapper.selectContentBy();
+    public List<Contents> selectContentBy(Integer wcid){
+        return contentsMapper.selectContentBy(wcid);
     }
 
     public Integer deleteByPrimaryKey(Integer id){

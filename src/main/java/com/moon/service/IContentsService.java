@@ -10,7 +10,7 @@ public interface IContentsService {
 
     Contents selectByPrimaryKey(Integer id);
 
-    List<Contents> selectContentBy();
+    List<Contents> selectContentBy(Integer wcid);
 
     List getColumns();
 

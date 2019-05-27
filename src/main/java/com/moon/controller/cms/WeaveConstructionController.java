@@ -83,7 +83,6 @@ public class WeaveConstructionController {
         if(ctions.size() >0){
             String str = JSON.toJSONString(ctions);
             //展示列表页面 调用
-//            constructionAPi.selectByWeaveConstruction(id);
             model.addAttribute("listSize",ctions.size());
             model.addAttribute("id",id);
 

@@ -37,5 +37,5 @@ public interface ContentsMapper {
 
     int updateByPrimaryKey(Contents record);
 
-    List<Contents> selectContentBy();
+    List<Contents> selectContentBy(@Param("wcid") Integer wcid);
 }

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jws.WebParam;
@@ -30,14 +31,22 @@ public class ContentsApi {
     }
 
     @GetMapping("contents/list")
-    public Map list(HttpSession session){
-        List<Contents> contents =  iContentsService.selectContentBy();
+    public Map list(String id){
+        List<Contents> contents = null;
+
+
+        if(StringUtils.isEmpty(id) || id.equals("null")){
+            contents = iContentsService.selectContentBy(null);
+        }else{
+            Integer wcid = Integer.parseInt(id);
+            contents = iContentsService.selectContentBy(wcid == 1 ? null : wcid);
+        }
+
         Map<String,Object> map = new HashMap<>();
         map.put("code","0");
         map.put("msg","操作成功");
         map.put("data", contents);
         map.put("count", contents.size());
-        session.setAttribute("contentSize",contents.size());
         return map;
     }
 
