@@ -1,15 +1,15 @@
 package com.moon.controller.api;
 
+import com.alibaba.fastjson.JSON;
 import com.moon.commons.ServerResponse;
 import com.moon.pojo.WeaveConstruction;
 import com.moon.service.IWeaveConstructionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +25,20 @@ public class WeaveConstructionAPi {
         this.iWeaveConstructionService = iWeaveConstructionService;
     }
 
+//      List<WeaveConstruction> ctions = iWeaveConstructionService.selectByPid(id);
+
     @GetMapping("/column/list/v1")
-    public Map selectByWeaveConstruction(){
-        List<WeaveConstruction> columns =  iWeaveConstructionService.selectAll();
+    public Map selectByWeaveConstruction(String id){
+
+        log.info("id {}",id);
+        List<WeaveConstruction> columns = null;
         Map<String,Object> map = new HashMap<>();
+
+        if(StringUtils.isEmpty(id) || id.equals("null")){
+            columns = iWeaveConstructionService.selectAll();
+        }else{
+            columns = iWeaveConstructionService.selectPidByCaseWhen(Integer.parseInt(id));
+        }
         map.put("code","0");
         map.put("msg","SUCCESS");
         map.put("data", columns);

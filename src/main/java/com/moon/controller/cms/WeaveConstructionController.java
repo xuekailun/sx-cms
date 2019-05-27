@@ -1,21 +1,22 @@
 package com.moon.controller.cms;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.moon.controller.api.WeaveConstructionAPi;
 import com.moon.pojo.WeaveConstruction;
 import com.moon.service.IWeaveConstructionService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.thymeleaf.util.StringUtils;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
+
+
 
 /***
  * 组织架构
@@ -25,8 +26,16 @@ import java.util.List;
 @Slf4j
 public class WeaveConstructionController {
 
+
+    private final IWeaveConstructionService iWeaveConstructionService;
+
+    private final WeaveConstructionAPi constructionAPi;
+
     @Autowired
-    private IWeaveConstructionService iWeaveConstructionService;
+    public WeaveConstructionController(IWeaveConstructionService iWeaveConstructionService, WeaveConstructionAPi constructionAPi) {
+        this.iWeaveConstructionService = iWeaveConstructionService;
+        this.constructionAPi = constructionAPi;
+    }
 
     @GetMapping("demo")
     public String demo() {
@@ -50,8 +59,15 @@ public class WeaveConstructionController {
         return "cms/column/mailbox";
     }
 
+    private String selectCtionsByPid(String id){
+
+        return "cms/column/mailbox";
+    }
+
     /***
      * 添加栏目页面
+     * 1.通过id 去查询是否有子集，如果有子集，则展示列表页
+     * 2.如果没有子集，则展示添加页面
      * @return
      */
     @GetMapping("add")
@@ -62,6 +78,17 @@ public class WeaveConstructionController {
             list = iWeaveConstructionService.getColumns();
         }
         model.addAttribute("columnList",list);
+
+        List<WeaveConstruction> ctions = iWeaveConstructionService.selectByPid(id);
+        if(ctions.size() >0){
+            String str = JSON.toJSONString(ctions);
+            //展示列表页面 调用
+//            constructionAPi.selectByWeaveConstruction(id);
+            model.addAttribute("listSize",ctions.size());
+            model.addAttribute("id",id);
+
+            return "cms/column/mailbox";
+        }
 
         WeaveConstruction ction = iWeaveConstructionService.selectById(id);
 

@@ -21,6 +21,8 @@ public interface IWeaveConstructionService {
 
     List<WeaveConstruction> selectAll();
 
+    List<WeaveConstruction> selectPidByCaseWhen(Integer pid);
+
     List<WeaveConstruction> selectByPid(Integer pid);
 
 

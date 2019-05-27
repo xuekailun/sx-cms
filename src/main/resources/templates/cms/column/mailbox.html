@@ -69,11 +69,13 @@
     layui.use('table', function(){
         var table = layui.table;
 
+        var id = [[${id}]];
+
         //第一个实例
         table.render({
             elem: '#demo'
             ,id: 'wId'
-            ,url: '/column/list/v1' //数据接口
+            ,url: '/column/list/v1?id='+id //数据接口
             ,page: true //开启分页
             ,skin: 'nob'
             ,cols: [[ //表头
@@ -104,6 +106,9 @@
 
 
     var dataList = [[${columnList}]];
+
+
+
     var data = [
         {id:1, pId:0, name: "父节点1",url:"/column/list",target:"_self"},
         {id:11, pId:1, name: "子节点1",url:"http://www.treejs.cn/",target:"_self"},

@@ -38,6 +38,10 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
         return weaveConstructionMapper.selectAllByCaseWhen();
     }
 
+    public List<WeaveConstruction> selectPidByCaseWhen(Integer pid){
+        return weaveConstructionMapper.selectPidByCaseWhen(pid);
+    }
+
 
 
     public List<WeaveConstruction> selectByPid(Integer pid){

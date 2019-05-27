@@ -3,6 +3,9 @@ package com.moon.pojo;
 import lombok.Data;
 
 public class WeaveConstruction {
+
+
+
     private Integer wId;
 
     private String wName;
@@ -23,6 +26,15 @@ public class WeaveConstruction {
 
     private String tname;
     private String sname;
+    private Integer pid;
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
 
     public String getTname() {
         return tname;

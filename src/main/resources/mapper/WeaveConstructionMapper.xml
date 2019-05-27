@@ -108,11 +108,12 @@
     where w_id = #{Id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll"  resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from weave_construction
     where w_id != 1
+
   </select>
 
   <select id="selectByIsShow" parameterType="map" resultMap="BaseResultMap">
@@ -147,6 +148,31 @@
         weave_construction
     WHERE
 	w_id != 1
+  </select>
+
+  <select id="selectPidByCaseWhen" parameterType="integer"   resultType="com.moon.pojo.WeaveConstruction">
+    SELECT
+	w_id as wId,
+	w_name as wName,
+	w_pid as wPid,
+	w_path as wPath,
+    CASE w_isshow
+    WHEN '1' THEN
+        '是'
+    WHEN '0' THEN
+        '否'
+    END as sname,
+        CASE w_type
+    WHEN '1' THEN
+        '图文'
+    WHEN '2' THEN
+        '下载'
+    END as tname
+    FROM
+        weave_construction
+    WHERE
+	w_id != 1
+    and  w_pid = #{pId,jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
