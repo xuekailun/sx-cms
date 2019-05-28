@@ -79,6 +79,7 @@ public class WeaveConstructionController {
         }
         model.addAttribute("columnList",list);
 
+
         List<WeaveConstruction> ctions = iWeaveConstructionService.selectByPid(id);
         if(ctions.size() >0){
             String str = JSON.toJSONString(ctions);

@@ -19,9 +19,11 @@ public interface IWeaveConstructionService {
      */
     List getColumns();
 
-    List<WeaveConstruction> selectAll();
+    List standardTree();
 
-    List<WeaveConstruction> selectPidByCaseWhen(Integer pid);
+    List<WeaveConstruction> selectAll(Integer start,Integer limit);
+
+    List<WeaveConstruction> selectPidByCaseWhen(Integer pid,Integer start,Integer limit);
 
     List<WeaveConstruction> selectByPid(Integer pid);
 

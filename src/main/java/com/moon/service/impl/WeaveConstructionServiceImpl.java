@@ -34,12 +34,12 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
 
 
     /* 查询栏目除跟目录 */
-    public List<WeaveConstruction> selectAll(){
-        return weaveConstructionMapper.selectAllByCaseWhen();
+    public List<WeaveConstruction> selectAll(Integer start,Integer limit){
+        return weaveConstructionMapper.selectAllByCaseWhen(start,limit);
     }
 
-    public List<WeaveConstruction> selectPidByCaseWhen(Integer pid){
-        return weaveConstructionMapper.selectPidByCaseWhen(pid);
+    public List<WeaveConstruction> selectPidByCaseWhen(Integer pid,Integer start,Integer limit){
+        return weaveConstructionMapper.selectPidByCaseWhen(pid,start,limit);
     }
 
 
@@ -61,8 +61,56 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
         return new WeaveConstruction();
     }
 
+
     /**
      * 获取树
+     * 不带跳转连接
+     * @return
+     */
+    public List standardTree(){
+        List<WeaveConstruction> constructions = weaveConstructionMapper.selectByPid(0);
+        Integer id = null;
+        String name = null;
+        Integer pid = null;
+        Integer gid = null;
+        String gname = null;
+        Integer gpid = null;
+        List<Column> allList = null;
+
+        List<Object> list = new ArrayList<>();
+        for (WeaveConstruction obj : constructions) {
+            id = obj.getwId();
+            name = obj.getwName();
+            pid = obj.getwPid();
+            Column column = new Column();
+            column.setId(id);
+            column.setPId(pid);
+            column.setName(name);
+
+            //显示添加的页面
+            list.add(column);
+            List<WeaveConstruction> weaveConstructionList = weaveConstructionMapper.selectAll();
+            for(WeaveConstruction ction : weaveConstructionList){
+                allList = new ArrayList<>();
+                gid = ction.getwId();
+                gname = ction.getwName();
+                gpid = ction.getwPid();
+                column = new Column();
+                column.setId(gid);
+                column.setPId(gpid);
+                column.setName(gname);
+                //显示添加的页面
+                list.add(column);
+
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * 获取树
+     * 带跳转连接
      * @return
      */
     public List getColumns(){

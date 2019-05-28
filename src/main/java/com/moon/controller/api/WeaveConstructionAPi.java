@@ -28,16 +28,16 @@ public class WeaveConstructionAPi {
 //      List<WeaveConstruction> ctions = iWeaveConstructionService.selectByPid(id);
 
     @GetMapping("/column/list/v1")
-    public Map selectByWeaveConstruction(String id){
+    public Map selectByWeaveConstruction(String id,String limit,String page){
 
         log.info("id {}",id);
         List<WeaveConstruction> columns = null;
         Map<String,Object> map = new HashMap<>();
 
         if(StringUtils.isEmpty(id) || id.equals("null")){
-            columns = iWeaveConstructionService.selectAll();
+            columns = iWeaveConstructionService.selectAll(Integer.parseInt(page),Integer.parseInt(limit));
         }else{
-            columns = iWeaveConstructionService.selectPidByCaseWhen(Integer.parseInt(id));
+            columns = iWeaveConstructionService.selectPidByCaseWhen(Integer.parseInt(id),Integer.parseInt(page),Integer.parseInt(limit));
         }
         map.put("code","0");
         map.put("msg","SUCCESS");

@@ -44,6 +44,11 @@ public class ContentsController {
         if(list == null){
             list = iContentsService.getColumns();
         }
+
+        List treeList = iWeaveConstructionService.standardTree();
+        log.info("treeList :{}",treeList);
+        model.addAttribute("standardTree",treeList);
+
         model.addAttribute("columnList",list);
         // 查询文章表里面的wcid 字段是否有值 如果有值 则显示列表
         WeaveConstruction ction = iWeaveConstructionService.selectById(id);
