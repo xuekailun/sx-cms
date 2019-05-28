@@ -44,7 +44,10 @@
 
                             <div class="col-sm-10">
                                 <input type="hidden" th:value="${wId}" id="wId"/>
-                                <input type="text" th:value="${wName}" class="form-control" value="">
+                                <input type="text" id="citySel"  onfocus="showMenu();" readonly th:value="${wName}" class="form-control" value="">
+                                <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+                                    <ul id="treeDemo1" class="ztree" style="margin-top:0; width:160px;"></ul>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -111,16 +114,67 @@
 
     var dataList = [[${columnList}]];
     var setting = {
+        view: {
+            dblClickExpand: false
+        },
         data: {
             simpleData: {
                 enable: true,
 
             }
+        },
+        callback: {
+            beforeClick: beforeClick,
+            onClick: onClick
         }
     };
 
     var zNodes = dataList;
 
+    /* 文本框显示下拉框开始*/
+    function beforeClick(treeId, treeNode) {
+        var check = treeNode;
+        return check;
+    }
+
+
+    function onClick(e, treeId, treeNode) {
+
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo1"),
+            nodes = zTree.getSelectedNodes(),
+            v = "";
+        id = "";
+        nodes.sort(function compare(a,b){return a.id-b.id;});
+        for (var i=0, l=nodes.length; i<l; i++) {
+            v += nodes[i].name + ",";
+            id += nodes[i].id + ",";
+        }
+        if (v.length > 0 ) v = v.substring(0, v.length-1);
+        if (id.length > 0 ) id = id.substring(0, id.length-1);
+
+        var cityObj = $("#citySel");
+        $("#trId").val(id);
+        cityObj.attr("value", v);
+    }
+
+    function showMenu() {
+
+        var cityObj = $("#citySel");
+        var cityOffset = $("#citySel").offset();
+        $("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+        $("body").bind("mousedown", onBodyDown);
+    }
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+            hideMenu();
+        }
+    }
+    /* 文本框显示下拉框结束*/
     $(document).ready(function () {
 
         $('.summernote').summernote({
@@ -128,6 +182,8 @@
         });
 
         $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        $.fn.zTree.init($("#treeDemo1"), setting, zNodes);
+
     });
     var edit = function () {
         $("#eg").addClass("no-padding");

@@ -44,7 +44,7 @@ public interface WeaveConstructionMapper {
 
     List<WeaveConstruction> selectAllByCaseWhen();
 
-    List<WeaveConstruction> selectPidByCaseWhen(Integer pid);
+    List<WeaveConstruction> selectPidByCaseWhen(@Param("pid")Integer pid);
 
     /* 查询栏目是否在导航栏显示，如果不在导航栏显示，是否主页显示*/
     List<WeaveConstruction> selectByIsShow(@Param("isShow") String isShow,@Param("isList") String isList);

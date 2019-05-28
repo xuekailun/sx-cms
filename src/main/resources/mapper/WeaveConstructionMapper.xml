@@ -150,7 +150,7 @@
 	w_id != 1
   </select>
 
-  <select id="selectPidByCaseWhen" parameterType="integer"   resultType="com.moon.pojo.WeaveConstruction">
+  <select id="selectPidByCaseWhen" parameterType="integer"  resultType="com.moon.pojo.WeaveConstruction">
     SELECT
 	w_id as wId,
 	w_name as wName,
@@ -172,7 +172,9 @@
         weave_construction
     WHERE
 	w_id != 1
-    and  w_pid = #{pId,jdbcType=INTEGER}
+    <if test="pid != null" >
+     and  w_pid = #{pid,jdbcType=INTEGER}
+    </if>
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
