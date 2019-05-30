@@ -21,7 +21,7 @@ public interface IWeaveConstructionService {
 
     List standardTree();
 
-    List<WeaveConstruction> selectAll(Integer start,Integer limit);
+    List<WeaveConstruction> selectAll();
 
     List<WeaveConstruction> selectPidByCaseWhen(Integer pid,Integer start,Integer limit);
 

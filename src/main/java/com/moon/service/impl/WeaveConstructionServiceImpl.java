@@ -34,11 +34,12 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
 
 
     /* 查询栏目除跟目录 */
-    public List<WeaveConstruction> selectAll(Integer start,Integer limit){
-        return weaveConstructionMapper.selectAllByCaseWhen(start,limit);
+    public List<WeaveConstruction> selectAll(){
+        return weaveConstructionMapper.selectAllByCaseWhen();
     }
 
     public List<WeaveConstruction> selectPidByCaseWhen(Integer pid,Integer start,Integer limit){
+        start=(start-1)*limit;
         return weaveConstructionMapper.selectPidByCaseWhen(pid,start,limit);
     }
 

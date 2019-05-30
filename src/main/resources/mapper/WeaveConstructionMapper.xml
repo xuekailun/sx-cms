@@ -148,7 +148,7 @@
         weave_construction
     WHERE
 	w_id != 1
-	 LIMIT #{start},#{limit}
+
   </select>
 
   <select id="selectPidByCaseWhen" parameterType="map"  resultType="com.moon.pojo.WeaveConstruction">

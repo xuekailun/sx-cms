@@ -66,8 +66,10 @@
 <script src="/layui/layui.js"></script>
 
 <script  th:inline="javascript">
-    layui.use('table', function(){
+    layui.use(['table','laypage','layer'], function(){
         var table = layui.table;
+        var laypage = layui.laypage;
+        var layer = layui.layer;
 
         var id = [[${id}]];
 
@@ -86,6 +88,7 @@
                 ,{field: 'sname',title: '导航展示'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
             ]]
+
         });
 
         //监听行工具事件

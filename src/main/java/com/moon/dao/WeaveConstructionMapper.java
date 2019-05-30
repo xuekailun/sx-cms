@@ -42,7 +42,7 @@ public interface WeaveConstructionMapper {
     /* 查询栏目除跟目录 */
     List<WeaveConstruction> selectAll();
 
-    List<WeaveConstruction> selectAllByCaseWhen(@Param("start")Integer start,@Param("limit")Integer limit);
+    List<WeaveConstruction> selectAllByCaseWhen();
 
     List<WeaveConstruction> selectPidByCaseWhen(@Param("pid")Integer pid,@Param("start")Integer start,@Param("limit")Integer limit);
 
