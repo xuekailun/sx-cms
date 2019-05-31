@@ -43,6 +43,12 @@ public class WeaveConstructionServiceImpl implements IWeaveConstructionService {
         return weaveConstructionMapper.selectPidByCaseWhen(pid,start,limit);
     }
 
+    /* 查询总数 */
+    public int selectCount(){
+        int count = weaveConstructionMapper.selectCount();
+        return count-1;
+    }
+
 
 
     public List<WeaveConstruction> selectByPid(Integer pid){

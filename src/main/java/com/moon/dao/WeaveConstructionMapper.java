@@ -39,6 +39,8 @@ public interface WeaveConstructionMapper {
 
     int updateByPrimaryKey(WeaveConstruction record);
 
+    int selectCount();
+
     /* 查询栏目除跟目录 */
     List<WeaveConstruction> selectAll();
 

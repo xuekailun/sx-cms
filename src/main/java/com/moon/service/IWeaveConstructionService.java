@@ -25,6 +25,9 @@ public interface IWeaveConstructionService {
 
     List<WeaveConstruction> selectPidByCaseWhen(Integer pid,Integer start,Integer limit);
 
+    /* 查询总数 */
+    int selectCount();
+
     List<WeaveConstruction> selectByPid(Integer pid);
 
 
