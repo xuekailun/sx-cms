@@ -2,8 +2,10 @@ package com.moon.controller.api;
 
 import com.moon.commons.ServerResponse;
 import com.moon.pojo.Contents;
+import com.moon.pojo.OperationLog;
 import com.moon.pojo.WeaveConstruction;
 import com.moon.service.IContentsService;
+import com.moon.service.IOperationLogService;
 import com.moon.service.IWeaveConstructionService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +26,13 @@ public class ContentsApi {
 
     private final IWeaveConstructionService iWeaveConstructionService;
 
+    private final IOperationLogService logService;
+
     @Autowired
-    public ContentsApi(IContentsService iContentsService, IWeaveConstructionService iWeaveConstructionService) {
+    public ContentsApi(IContentsService iContentsService, IWeaveConstructionService iWeaveConstructionService, IOperationLogService logService) {
         this.iContentsService = iContentsService;
         this.iWeaveConstructionService = iWeaveConstructionService;
+        this.logService = logService;
     }
 
     @GetMapping("contents/list")
@@ -55,6 +60,12 @@ public class ContentsApi {
         reqBody.setInsertdate(new Date());
         int addcount = iContentsService.insertSelective(reqBody);
         if(addcount > 0){
+            OperationLog obj = new OperationLog();
+            //todo 未添加登陆名
+            obj.setCreatetime(new Date());
+            obj.setTitle("增加文章");
+            obj.setContent("title="+reqBody.getTitle());
+            logService.insertSelective(obj);
             return ServerResponse.createBySuccessMessage("添加成功");
         }
         return ServerResponse.createByError();
