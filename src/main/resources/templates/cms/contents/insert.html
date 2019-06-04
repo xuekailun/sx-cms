@@ -137,22 +137,49 @@
 
     /* 文本框显示下拉框结束*/
     $(document).ready(function () {
+debugger
 
         $('.summernote').summernote({
-            lang: 'zh-CN'
+            lang: 'zh-CN',
+            focus: true,
+            onImageUpload: function (files,editor,welEditable) {
+                sendFile(files[0],editor,welEditable);
+            }
         });
 
         $.fn.zTree.init($("#treeDemo"), setting, zNodes1);
         $.fn.zTree.init($("#treeDemo1"), setting, zNodes);
 
+        function sendFile(files,editor,welEditable){
+            debugger
+            var formData = new FormData();
+            formData.append("file", files);
+            $.ajax({
+                url: "addimg",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    debugger
+                    console.log(data)
+                    editor.insertImage(welEditable, data.msg);
+                }
+            });
+        }
+
     });
+
+
     var edit = function () {
         $("#eg").addClass("no-padding");
         $('.click2edit').summernote({
             lang: 'zh-CN',
-            focus: true
         });
     };
+
+
     var save = function () {
         $("#eg").removeClass("no-padding");
         var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).

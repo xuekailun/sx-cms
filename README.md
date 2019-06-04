@@ -9,3 +9,7 @@
 
 ## 富文本编辑
 > http://kindeditor.net/doc.php
+
+## Summernote 上传图片
+> https://pdf-lib.org/Home/Details/356
+> https://www.cnblogs.com/jingmin/p/6592325.html
