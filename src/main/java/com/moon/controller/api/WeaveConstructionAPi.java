@@ -22,23 +22,19 @@ public class WeaveConstructionAPi {
         this.iWeaveConstructionService = iWeaveConstructionService;
     }
 
-
     @GetMapping("/column/list/v1")
-    public Map selectByWeaveConstruction(String id,int page, int limit){
+    public Map selectByWeaveConstruction(Integer id,int page, int limit){
 
         List<WeaveConstruction> columns = null;
         Map<String,Object> map = new HashMap<>();
-//        columns =  iWeaveConstructionService.selectAll(curr,limit);
-
-//        if(StringUtils.isEmpty(id) || id.equals("null")){
-//            columns = iWeaveConstructionService.selectAll();
-//        }else{
-            columns = iWeaveConstructionService.selectPidByCaseWhen(Integer.parseInt(id),page,limit);
-//        }
+        if(id == 0){
+            id = null;
+        }
+        columns = iWeaveConstructionService.selectPidByCaseWhen(id,page,limit);
         map.put("code","0");
         map.put("msg","SUCCESS");
         map.put("data", columns);
-        map.put("count", 12);
+        map.put("count", iWeaveConstructionService.selectCount());
         log.info("columns {}",columns);
         return map;
     }

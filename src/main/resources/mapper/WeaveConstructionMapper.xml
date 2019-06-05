@@ -107,6 +107,10 @@
     from weave_construction
     where w_id = #{Id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectCount" resultType="int">
+    select count(*) from weave_construction
+  </select>
 
   <select id="selectAll"  resultMap="BaseResultMap">
     select
