@@ -1,12 +1,16 @@
 package com.moon.controller.api;
 
 import com.moon.commons.ServerResponse;
+import com.moon.pojo.OperationLog;
 import com.moon.pojo.WeaveConstruction;
+import com.moon.service.ILoginUserService;
+import com.moon.service.IOperationLogService;
 import com.moon.service.IWeaveConstructionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +21,12 @@ public class WeaveConstructionAPi {
 
     private final IWeaveConstructionService iWeaveConstructionService;
 
+    private final IOperationLogService logService;
+
     @Autowired
-    public WeaveConstructionAPi(IWeaveConstructionService iWeaveConstructionService) {
+    public WeaveConstructionAPi(IWeaveConstructionService iWeaveConstructionService, IOperationLogService logService) {
         this.iWeaveConstructionService = iWeaveConstructionService;
+        this.logService = logService;
     }
 
     @GetMapping("/column/list/v1")
@@ -44,6 +51,12 @@ public class WeaveConstructionAPi {
         log.info("reqBody {}",reqBody);
         int inserCount = iWeaveConstructionService.insertWeaveConstruction(reqBody);
         if(inserCount > 0){
+            OperationLog obj = new OperationLog();
+            //todo 未添加登陆名
+            obj.setCreatetime(new Date());
+            obj.setTitle("增加栏目");
+            obj.setContent("name="+reqBody.getwName());
+            logService.insertSelective(obj);
             return ServerResponse.createBySuccessMessage("添加成功");
         }
         return ServerResponse.createByError();
@@ -53,6 +66,12 @@ public class WeaveConstructionAPi {
     public ServerResponse delete(Integer id){
         int deleteCount = iWeaveConstructionService.deleteByPrimaryKey(id);
         if(deleteCount > 0){
+            OperationLog obj = new OperationLog();
+            //todo 未添加登陆名
+            obj.setCreatetime(new Date());
+            obj.setTitle("删除栏目");
+            obj.setContent("id="+id);
+            logService.insertSelective(obj);
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByError();

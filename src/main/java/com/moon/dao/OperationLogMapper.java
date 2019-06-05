@@ -3,8 +3,11 @@ package com.moon.dao;
 import com.moon.pojo.OperationLog;
 import com.moon.pojo.OperationLogExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface OperationLogMapper {
     int countByExample(OperationLogExample example);
 
@@ -17,6 +20,8 @@ public interface OperationLogMapper {
     int insertSelective(OperationLog record);
 
     List<OperationLog> selectByExample(OperationLogExample example);
+
+    List<OperationLog> selectAll(@Param("title") String title,@Param("start")Integer start,@Param("limit")Integer limit);
 
     OperationLog selectByPrimaryKey(Integer id);
 

@@ -1,27 +1,17 @@
 package com.moon.controller.api;
 
-import ch.qos.logback.core.util.FileUtil;
 import com.moon.commons.ServerResponse;
 import com.moon.pojo.Contents;
 import com.moon.pojo.OperationLog;
-import com.moon.pojo.WeaveConstruction;
 import com.moon.service.IContentsService;
 import com.moon.service.IOperationLogService;
 import com.moon.service.IWeaveConstructionService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import javax.jws.WebParam;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.*;
 
@@ -103,6 +93,12 @@ public class ContentsApi {
     public ServerResponse delete(Integer id){
         int deleteCount = iContentsService.deleteByPrimaryKey(id);
         if(deleteCount > 0){
+            OperationLog obj = new OperationLog();
+            //todo 未添加登陆名
+            obj.setCreatetime(new Date());
+            obj.setTitle("删除文章");
+            obj.setContent("id="+id);
+            logService.insertSelective(obj);
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByError();

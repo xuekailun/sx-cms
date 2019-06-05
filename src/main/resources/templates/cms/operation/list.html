@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 收件箱</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/cms/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/cms/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/cms/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/cms/css/animate.css" rel="stylesheet">
+    <link href="/cms/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12 animated fadeInRight">
+            <div class="mail-box-header">
+                <h2>
+                    日志列表
+                </h2>
+                <div class="input-group" style="margin-top: 20px">
+                    <input type="text" placeholder="请输入标题" id="titleLog" autocomplete="off" class="input form-control">
+                    <span class="input-group-btn">
+                                        <button id="btnLog" type="button" data-type="reload"
+                                                class="btn btn btn-primary"> <i class="fa fa-search"></i> 搜索</button>
+                                </span>
+                </div>
+            </div>
+            <div class="mail-box">
+                <table id="condemo" lay-filter="test" class="table table-hover table-mail"></table>
+                <script type="text/html" id="cbarDemo">
+                    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 全局js -->
+<script src="/cms/js/jquery.min.js?v=2.1.4"></script>
+<script src="/cms/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="/cms/js/content.js?v=1.0.0"></script>
+
+<script type="text/javascript" src="/cms/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/module/contents/content.js"></script>
+<!-- iCheck -->
+<script src="/cms/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/layui/layui.js"></script>
+
+<script th:inline="javascript">
+
+    layui.use('table', function () {
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#condemo'
+            , id: 'wId'
+            , url: '/operation/list'//数据接口
+            , page: true //开启分页
+            , skin: 'nob'
+            , cols: [[ //表头
+                {field: 'id', title: 'id', fixed: 'left'}
+                , {field: 'username', title: '用户名'}
+                , {field: 'createtime', title: '时间'}
+                , {field: 'title', title: '标题'}
+                , {field: 'content', title: '内容'}
+            ]]
+        });
+
+
+        var $ = layui.$, active = {
+            reload: function () {
+                debugger
+                var title = $('#titleLog').val();
+                //执行重载
+                table.reload('wId', {
+                    page: {
+                        curr: 2 //重新从第 1 页开始
+                    }
+                    , where: {
+                        title: title
+                    }
+                }, 'data');
+
+            }
+        }
+
+
+        $('#btnLog').on('click', function () {
+            debugger
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

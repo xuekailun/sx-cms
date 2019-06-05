@@ -6,6 +6,8 @@ import com.moon.service.IOperationLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OperationLogServiceImpl implements IOperationLogService {
 
@@ -18,5 +20,10 @@ public class OperationLogServiceImpl implements IOperationLogService {
 
     public int insertSelective(OperationLog record){
         return operationLogMapper.insertSelective(record);
+    }
+
+    public List<OperationLog> selectAll(String title,Integer start,Integer limit){
+        start=(start-1)*limit;
+        return operationLogMapper.selectAll(title,start,limit);
     }
 }
