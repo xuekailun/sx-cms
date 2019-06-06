@@ -40,10 +40,10 @@ public class ContentsApi {
         Map<String,Object> map = new HashMap<>();
         String suffx = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         log.info("fileName :{}; fileType : {}", suffx);
-        String filePath = "D:\\";
+        String filePath = "D:\\OTA\\";
         File f = new File(filePath+"123"+suffx);
         map.put("code",200);
-        map.put("msg",filePath+"123"+suffx);
+        map.put("msg","/OTA/123"+suffx);
         try {
             file.transferTo(f);
         }catch (Exception e){
