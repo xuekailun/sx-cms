@@ -13,3 +13,6 @@
 ## Summernote 上传图片
 > https://pdf-lib.org/Home/Details/356
 > https://www.cnblogs.com/jingmin/p/6592325.html
+
+## 关于Springboot 读取本地图片
+> https://www.jianshu.com/p/54e0ca450f88

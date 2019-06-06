@@ -32,4 +32,12 @@ public class IndexController {
         //查询 导航栏显示为1的
         return "lc/index";
     }
+
+
+    @GetMapping("/demoone")
+    public String demo(Model model){
+        String url = "/OTA/123.png";
+        model.addAttribute("demoone",url);
+        return "lc/demo";
+    }
 }
