@@ -34,9 +34,6 @@ public class ContentsApi {
 
     @PostMapping("cms/contents/addimg")
     public Map demo(MultipartFile file){
-//        File.separator
-//        String fileName = pic.getOriginalFilename();
-//        String fileType = fileName.split("[.]")[1];
         Map<String,Object> map = new HashMap<>();
         String suffx = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         log.info("fileName :{}; fileType : {}", suffx);
