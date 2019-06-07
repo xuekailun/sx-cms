@@ -12,12 +12,13 @@ public class DefaultPwd {
         return util.encode(key,value);
     }
 
+    /* 解密 */
     public String decode(String value){
         return util.decode(key,value);
     }
 
     public static void main(String[] args) {
-        System.out.println( new DefaultPwd().encrypt("15646"));
+        System.out.println( new DefaultPwd().encrypt("admin"));
         System.out.println("==============");
         System.out.println( new DefaultPwd().decode("be3u_bDLPjc"));
     }

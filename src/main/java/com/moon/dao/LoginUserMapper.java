@@ -24,6 +24,8 @@ public interface LoginUserMapper {
 
     LoginUser selectByPrimaryKey(Integer id);
 
+    LoginUser selectByLoginUser(@Param("username") String username,@Param("password") String password);
+
     int updateByExampleSelective(@Param("record") LoginUser record, @Param("example") LoginUserExample example);
 
     int updateByExample(@Param("record") LoginUser record, @Param("example") LoginUserExample example);
