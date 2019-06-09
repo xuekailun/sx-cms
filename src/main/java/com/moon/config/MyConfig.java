@@ -1,11 +1,15 @@
 package com.moon.config;
 
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@SpringBootApplication(scanBasePackages = "com.moon.controller")
 public class MyConfig implements WebMvcConfigurer {
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -15,4 +19,12 @@ public class MyConfig implements WebMvcConfigurer {
         //其中OTA表示访问的前缀。"file:D:/OTA/"是文件真实的存储路径
         registry.addResourceHandler("/OTA/**").addResourceLocations("file:D:/OTA/");
     }
+
+    public void addInterceptors(InterceptorRegistry registry) {
+        InterceptorRegistration ir = registry.addInterceptor(new LoginInterceptor());
+        ir.addPathPatterns("/cms/**");
+    }
+
+
+
 }

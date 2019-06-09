@@ -5,6 +5,7 @@ import com.moon.pojo.WeaveConstruction;
 import com.moon.service.IOperationLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,14 +28,23 @@ public class OperationLogApi {
     public Map selectByWeaveConstruction(String title,int page, int limit){
         log.info("title:{}",title);
 
+        if(StringUtils.isEmpty(title)){
+            title = null;
+        }
+
         List<OperationLog> operationLogs = logService.selectAll(title,page,limit);
         Map<String,Object> map = new HashMap<>();
 
         map.put("code","0");
         map.put("msg","SUCCESS");
         map.put("data", operationLogs);
-        map.put("count", operationLogs.size());
-        log.info("operationLogs {}",operationLogs);
+        if(title == null){
+            map.put("count",logService.selectCount());
+        }else {
+            map.put("count",operationLogs.size());
+        }
+
+        log.info("operationLogs {}",logService.selectCount());
         return map;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -30,8 +31,13 @@ public class IndexController {
         List<WeaveConstruction> navs =  iWeaveConstructionService.selectByIsShow("1",null);
         model.addAttribute("nav",navs);
         //查询 导航栏显示为1的
-        return "lc/index";
+        return "index";
     }
+
+    @GetMapping("/{path}")
+     public String test(@PathVariable("path") String path){
+        return path;
+     }
 
 
     @GetMapping("/demoone")

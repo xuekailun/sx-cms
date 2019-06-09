@@ -27,19 +27,17 @@
         <div class="col-sm-12 animated fadeInRight">
             <div class="mail-box-header">
                 <h2>
-                    日志列表
+                   友情链接列表
                 </h2>
                 <div class="input-group" style="margin-top: 20px">
-                    <input type="text" placeholder="请输入标题" id="titleLog" autocomplete="off" class="input form-control">
-                    <span class="input-group-btn">
-                                        <button id="btnLog" type="button" data-type="reload"
-                                                class="btn btn btn-primary"> <i class="fa fa-search"></i> 搜索</button>
-                                </span>
+                   <button onclick="add()" class="btn btn-sm btn-primary pull-right m-t-n-xs">
+                       添加
+                   </button>
                 </div>
             </div>
             <div class="mail-box">
-                <table id="condemo" lay-filter="test" class="table table-hover table-mail"></table>
-                <script type="text/html" id="cbarDemo">
+                <table id="flcondemo" lay-filter="test" class="table table-hover table-mail"></table>
+                <script type="text/html" id="flbarDemo">
                     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                 </script>
@@ -68,46 +66,40 @@
         var table = layui.table;
         //第一个实例
         table.render({
-            elem: '#condemo'
+            elem: '#flcondemo'
             , id: 'wId'
-            , url: '/operation/list'//数据接口
+            , url: '/fl/list'//数据接口
             , page: true //开启分页
             , skin: 'nob'
             , cols: [[ //表头
-                {field: 'id', title: 'id', fixed: 'left'}
-                , {field: 'username', title: '用户名'}
-                , {field: 'createtime', title: '时间'}
-                , {field: 'title', title: '标题'}
-                , {field: 'content', title: '内容'}
+                {field: 'id', title: 'ID', fixed: 'left'}
+                , {field: 'name', title: '名称'}
+                , {field: 'url', title: '链接'}
+                , {field: 'isshow', title: '显示'}
+                , {fixed: 'right', title:'操作', toolbar: '#flbarDemo'}
             ]]
         });
 
 
-        var $ = layui.$, active = {
-            reload: function () {
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
                 debugger
-                var title = $('#titleLog').val();
-                //执行重载
-                table.reload('wId', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                    , where: {
-                        title: title
-                    }
-                }, 'data');
-
+                layer.confirm('真的删除行么', function(index){
+                    toDelete(data.id,index);
+                });
+            } else if(obj.event === 'edit'){
+                window.location.href = "update/"+data.id;
             }
-        }
-
-
-        $('#btnLog').on('click', function () {
-            debugger
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
         });
 
     });
+
+
+    function add(){
+        window.location.href = "add";
+    }
 
 </script>
 

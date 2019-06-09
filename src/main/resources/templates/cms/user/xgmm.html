@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 收件箱</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/cms/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/cms/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/cms/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/cms/css/animate.css" rel="stylesheet">
+    <link href="/cms/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/layui/css/modules/layer/default/layer.css" type="text/css">
+
+    <style type="text/css">
+        .el-upload {
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            outline: 0;
+        }
+
+        .avatar-uploader-icon, img {
+            font-size: 28px;
+            color: #8c939d;
+            width: 130px;
+            height: 130px;
+            line-height: 130px;
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12 animated fadeInRight">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改密码
+                        <small></small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="form_basic.html#">选项1</a>
+                            </li>
+                            <li><a href="form_basic.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">原密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="oldpassword" th:value="${userInfo.password}">
+                                <input type="password" id="password" placeholder="请输入" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" id="newpassword" placeholder="请输入" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">确认密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" id="newpwd" placeholder="请输入" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="button" onclick="toXgmm()">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 全局js -->
+<script src="/cms/js/jquery.min.js?v=2.1.4"></script>
+<script src="/cms/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="/cms/js/content.js?v=1.0.0"></script>
+
+
+<script type="text/javascript" src="/cms/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/module/contents/insert.js"></script>
+<script type="text/javascript" src="/layui/lay/modules/layer.js"></script>
+<!-- iCheck -->
+<script src="/cms/js/plugins/iCheck/icheck.min.js"></script>
+<script th:inline="javascript">
+
+    function toXgmm() {
+
+        var oldpassword = $("#oldpassword").val();
+        var password = $("#password").val();
+        var newpassword = $("#newpassword").val();
+        var userid = $("#userid").val();
+        var newpwd = $("#newpwd").val();
+
+        if (password != oldpassword) {
+            layer.alert("您输入的原始密码不正确，请重新输入");
+            $("#password").val("");
+            return;
+        }
+
+        if(newpwd == "" || newpassword == ""){
+            layer.alert("新密码不能为空");
+            return ;
+        }
+
+        if (newpwd != newpassword) {
+            layer.alert("两次密码输入不一致！");
+            $("#newpwd").val("");
+            $("#newpassword").val("");
+            return;
+        }
+
+        $.ajax({
+            url: "xgmmSave",
+            type: "POST",
+            data: {
+                userid: userid,
+                password: password,
+                oldpassword: oldpassword,
+                newpassword: newpassword
+            },
+            success: function (data) {
+                if (data.result == 100) {
+                    //修改成功，调到登陆页面
+                    layer.alert(data.message, function () {
+                        window.top.location.href = "${basePath }/qzh/user/quit";
+                    });
+                } else if (data.result == 200) {
+                    layer.alert(data.message, function () {
+                        window.top.location.href = "${basePath }/qzh/user/welcome";
+                    });
+                }
+            }
+        });
+    }
+
+    function cancel() {
+        window.history.back(-1);
+    }
+</script>
+
+
+</body>
+
+</html>

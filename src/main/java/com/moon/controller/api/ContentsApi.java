@@ -38,15 +38,16 @@ public class ContentsApi {
         String suffx = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         log.info("fileName :{}; fileType : {}", suffx);
         String filePath = "D:\\OTA\\";
-        File f = new File(filePath+"123"+suffx);
-        map.put("code",200);
-        map.put("msg","/OTA/123"+suffx);
+        String imageName = Long.toString(System.currentTimeMillis());
+        File f = new File(filePath+imageName+suffx);
+
         try {
             file.transferTo(f);
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        map.put("code",200);
+        map.put("msg","/OTA/"+imageName+suffx);
         return map;
     }
 

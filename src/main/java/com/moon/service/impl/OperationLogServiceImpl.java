@@ -26,4 +26,8 @@ public class OperationLogServiceImpl implements IOperationLogService {
         start=(start-1)*limit;
         return operationLogMapper.selectAll(title,start,limit);
     }
+
+    public int selectCount(){
+        return operationLogMapper.selectCount();
+    }
 }

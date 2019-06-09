@@ -108,7 +108,7 @@
     where w_id = #{Id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectCount" resultType="int">
+  <select id="selectCount" resultType="java.lang.Integer">
     select count(*) from weave_construction
   </select>
 

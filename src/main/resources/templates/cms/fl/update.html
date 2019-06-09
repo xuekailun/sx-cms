@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 收件箱</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/cms/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/cms/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/cms/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/cms/css/animate.css" rel="stylesheet">
+    <link href="/cms/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/cms/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+    <style type="text/css">
+        .el-upload {
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            outline: 0;
+        }
+
+        .avatar-uploader-icon,img {
+            font-size: 28px;
+            color: #8c939d;
+            width: 130px;
+            height: 130px;
+            line-height: 130px;
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12 animated fadeInRight">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改友情链接 <small></small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="form_basic.html#">选项1</a>
+                            </li>
+                            <li><a href="form_basic.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal">
+
+                        <div class="form-group">
+                            <input type="hidden" id="yqId" th:value="${friendlyLink.id}" >
+                            <label class="col-sm-2 control-label" >名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" th:value="${friendlyLink.name}"  id="yqName"  placeholder="请输入" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">网站地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="yqPath" th:value="${friendlyLink.url}"   placeholder="请输入" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">显示</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" th:value="${friendlyLink.isshow}" id="yqShow" name="account">
+                                    <option th:selected="${friendlyLink.isshow} == 1" value="1">是</option>
+                                    <option th:selected="${friendlyLink.isshow} == 0" value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">LOGO</label>
+                            <div class="col-sm-10">
+                                <div class="cms-upload-box">
+                                    <img src="" th:src="${friendlyLink.logoimg}" id="logoimg" alt="">
+                                    <div tabindex="0" class="el-upload el-upload--text">
+                                        <i data-v-0304eacc="" class="el-icon-plus avatar-uploader-icon"></i>
+                                        <input type="file" id="uploadFile"  name="uploadFile" onchange="setImg(this);" class="el-upload__input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-10">
+                                <input type="text" th:value="${friendlyLink.memo}" id="yqmemo" placeholder="请输入" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="button" onclick="YqtoUpdate()">保存内容</button>
+                                <button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 全局js -->
+<script src="/cms/js/jquery.min.js?v=2.1.4"></script>
+<script src="/cms/js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="/cms/js/content.js?v=1.0.0"></script>
+
+
+<script type="text/javascript" src="/cms/ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/module/contents/content.js"></script>
+<script type="text/javascript" src="/layui/lay/modules/layer.js"></script>
+<!-- iCheck -->
+<script src="/cms/js/plugins/iCheck/icheck.min.js"></script>
+<script  th:inline="javascript">
+
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+
+
+    });
+
+    function setImg(obj) {
+        debugger
+
+        var f=$(obj).val();
+        console.log(obj);
+        if(f == null || f ==undefined || f == ''){
+            return false;
+        }
+        if(!/\.(?:png|jpg|bmp|gif|PNG|JPG|BMP|GIF)$/.test(f))
+        {
+            alert("类型必须是图片(.png|jpg|bmp|gif|PNG|JPG|BMP|GIF)");
+            $(obj).val('');
+            return false;
+        }
+        var data = new FormData();
+        console.log(data);
+        $.each($(obj)[0].files,function(i,file){
+            data.append('file', file);
+        });
+        console.log(data);
+        debugger
+        $.ajax({
+            type: "POST",
+            url: "addimg",
+            data: data,
+            cache: false,
+            contentType: false,    //不可缺
+            processData: false,    //不可缺
+            dataType:"json",
+            success: function(ret) {
+                debugger
+                console.log(ret);
+                if(ret.code == 200){
+                    document.getElementById("logoimg").src = ret.msg;
+                }
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("上传失败，请检查网络后重试");
+            }
+        });
+
+    }
+
+
+    function cancel(){
+        window.history.back(-1);
+    }
+</script>
+
+
+</body>
+
+</html>

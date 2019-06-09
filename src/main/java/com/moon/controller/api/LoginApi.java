@@ -41,4 +41,10 @@ public class LoginApi {
         session.setAttribute("userInfo",user);
         return ServerResponse.createBySuccess("登陆成功",user);
     }
+
+    @PostMapping("/cms/xgmmSave")
+    public ServerResponse xgmmSave(@RequestBody LoginUser loginUser){
+
+        return null;
+    }
 }

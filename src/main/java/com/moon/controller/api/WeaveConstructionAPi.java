@@ -42,7 +42,7 @@ public class WeaveConstructionAPi {
         map.put("msg","SUCCESS");
         map.put("data", columns);
         map.put("count", iWeaveConstructionService.selectCount());
-        log.info("columns {}",columns);
+        log.info("columns {}",iWeaveConstructionService.selectCount());
         return map;
     }
 

@@ -9,4 +9,6 @@ public interface IOperationLogService {
     int insertSelective(OperationLog record);
 
     List<OperationLog> selectAll(String title,Integer start,Integer limit);
+
+    int selectCount();
 }

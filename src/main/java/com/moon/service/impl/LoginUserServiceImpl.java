@@ -37,4 +37,6 @@ public class LoginUserServiceImpl implements ILoginUserService {
         return pwd.encrypt(password);
     }
 
+//    public int xgmmSave(String username, String password)
+
 }

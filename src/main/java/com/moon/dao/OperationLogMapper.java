@@ -23,6 +23,8 @@ public interface OperationLogMapper {
 
     List<OperationLog> selectAll(@Param("title") String title,@Param("start")Integer start,@Param("limit")Integer limit);
 
+    int selectCount();
+
     OperationLog selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") OperationLog record, @Param("example") OperationLogExample example);

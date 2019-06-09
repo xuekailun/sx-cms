@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.moon.dao.OperationLogMapper" >
-  <resultMap id="BaseResultMap" type="com.moon.pojo.OperationLog" >
+<mapper namespace="com.moon.dao.WebSiteSettingMapper" >
+  <resultMap id="BaseResultMap" type="com.moon.pojo.WebSiteSetting" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="logType" property="logtype" jdbcType="INTEGER" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="depict" property="depict" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,132 +66,90 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, createtime, title, content, logType
+    id, title, keyword, depict
   </sql>
-
-  <select id="selectCount" resultType="java.lang.Integer">
-    select count(1) from log
-  </select>
-
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.pojo.WebSiteSettingExample" >
     select
     <include refid="Base_Column_List" />
-    from log
-    <where>
-      <if test="title != null">
-        title like '%${title}%'
-      </if>
-    </where>
-    LIMIT #{start},#{limit}
-  </select>
+    from website_setting
+    <if test="start != null and limit != null">
+      LIMIT #{start},#{limit}
+    </if>
 
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.pojo.OperationLogExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from log
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from log
+    from website_setting
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from log
+    delete from website_setting
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.moon.pojo.OperationLogExample" >
-    delete from log
+  <delete id="deleteByExample" parameterType="com.moon.pojo.WebSiteSettingExample" >
+    delete from website_setting
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.moon.pojo.OperationLog" >
-    insert into log (id, username, createtime, 
-      title, content, logType
-      )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{logtype,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.moon.pojo.WebSiteSetting" >
+    insert into website_setting (id, title, keyword, 
+      depict)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{depict,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.moon.pojo.OperationLog" >
-    insert into log
+  <insert id="insertSelective" parameterType="com.moon.pojo.WebSiteSetting" >
+    insert into website_setting
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="username != null" >
-        username,
-      </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
       <if test="title != null" >
         title,
       </if>
-      <if test="content != null" >
-        content,
+      <if test="keyword != null" >
+        keyword,
       </if>
-      <if test="logtype != null" >
-        logType,
+      <if test="depict != null" >
+        depict,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="logtype != null" >
-        #{logtype,jdbcType=INTEGER},
+      <if test="depict != null" >
+        #{depict,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.moon.pojo.OperationLogExample" resultType="java.lang.Integer" >
-    select count(*) from log
+  <select id="countByExample" parameterType="com.moon.pojo.WebSiteSettingExample" resultType="java.lang.Integer" >
+    select count(*) from website_setting
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update log
+    update website_setting
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createtime != null" >
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      </if>
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null" >
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
       </if>
-      <if test="record.logtype != null" >
-        logType = #{record.logtype,jdbcType=INTEGER},
+      <if test="record.depict != null" >
+        depict = #{record.depict,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -201,45 +157,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update log
+    update website_setting
     set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
       title = #{record.title,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
-      logType = #{record.logtype,jdbcType=INTEGER}
+      keyword = #{record.keyword,jdbcType=VARCHAR},
+      depict = #{record.depict,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.moon.pojo.OperationLog" >
-    update log
+  <update id="updateByPrimaryKeySelective" parameterType="com.moon.pojo.WebSiteSetting" >
+    update website_setting
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=VARCHAR},
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="logtype != null" >
-        logType = #{logtype,jdbcType=INTEGER},
+      <if test="depict != null" >
+        depict = #{depict,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.moon.pojo.OperationLog" >
-    update log
-    set username = #{username,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      logType = #{logtype,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.moon.pojo.WebSiteSetting" >
+    update website_setting
+    set title = #{title,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      depict = #{depict,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
