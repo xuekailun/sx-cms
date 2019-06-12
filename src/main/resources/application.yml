@@ -15,7 +15,10 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.moon.dao
+
 logging:
+  config: classpath:log/logback.xml
+  path: E:/huishen/log/cx-cms
   level:
     com:
       moon:
